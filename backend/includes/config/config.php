@@ -26,10 +26,10 @@
 	define ( 'MAIL_PASSWORD', 'Ker$wr543');
 	define ('MAIL_SECURE','ssl');
 	
-	define('GOOGLE_APIKEY', 'AIzaSyCZrOa5K7mow_tX5KP253wPifIs7qQ4y3k');
+	define('GOOGLE_APIKEY', '');
 	
-	define('FACEBOOK_APP_ID','1545942492291033'); //App ID
-	define('FACEBOOK_APP_SECRET','8ddb38447c288996c5efe5e03c6dbcfa');
+	define('FACEBOOK_APP_ID',''); //App ID
+	define('FACEBOOK_APP_SECRET','');
 	
 	//Hash definitions
 	define("PBKDF2_HASH_ALGORITHM", "sha256");
