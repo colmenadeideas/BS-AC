@@ -46,11 +46,11 @@ const Login = ({history}) => {
         <div className="d-flex justify-content-center">
             
             <div className="login-container">
-                <img src="../images/img_text.png" className="login_logo" alt="logo"/>
+                <img src="../images/img_test.png" className="login_logo" alt="logo"/>
                 <h2 className="text-center mb-5">Espacio de texto</h2>
                 <form className="login-form" onSubmit={handleSubmitLogin}>
                     { errorValidate
-                        ?   <div className="alert alert-danger">Debe tener un minimo de 44 caracteres</div>
+                        ?   <div className="alert alert-danger">Debe tener un minimo de 4 caracteres</div>
                         :   ""
                     }
                     { errorLogin
