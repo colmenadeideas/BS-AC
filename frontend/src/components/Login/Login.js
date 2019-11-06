@@ -18,19 +18,20 @@ const Login = ({history}) => {
     const [username, saveUsername] = useState('')
     const [password, savePassword] = useState('')
 
-    // Iniciar Sesion
     const dispatch = useDispatch();
-    const login = data => dispatch(loginAction(data))
-    const validateForm = () => dispatch(validateFormAction())
-    const validateSuccess = () => dispatch(validationSuccess())
-    const validateError = () => dispatch(validationError())
-
+    
     const handleSubmitLogin = e => {
         e.preventDefault();
 
+        // Iniciar Sesion
+        const login = data => dispatch(loginAction(data))
+        const validateForm = () => dispatch(validateFormAction())
+        const validateSuccess = () => dispatch(validationSuccess())
+        const validateError = () => dispatch(validationError())
+
         validateForm();
 
-        if(username.trim() === '' || password.trim() === '') {
+        if(username.length < 4 || password.length < 4) {
             validateError();
 
         } else {
@@ -49,7 +50,7 @@ const Login = ({history}) => {
                 <h2 className="text-center mb-5">Espacio de texto</h2>
                 <form className="login-form" onSubmit={handleSubmitLogin}>
                     { errorValidate
-                        ?   <div className="alert alert-danger">Los Campos deben estar llenos</div>
+                        ?   <div className="alert alert-danger">Debe tener un minimo de 44 caracteres</div>
                         :   ""
                     }
                     { errorLogin
@@ -81,13 +82,16 @@ const Login = ({history}) => {
                         ?   <button type="submit" className="btn btn-dark btn-block redondeado mb-3">BOTON LOGIN</button>
                         :   <button type="submit" disabled className="btn btn-dark btn-block redondeado mb-3">BOTON LOGIN</button>
                     }
-                    <h6>Espacio de texto</h6>
-
-                    <hr/> 
+                    <h6><Link to="/access/forgot">He olvidado mi contraseña</Link></h6>
+                    <div className="or mt-4 mb-2">
+                        <div className="division"></div>
+                        <div className="small">or</div>
+                        <div className="division"></div>
+                    </div>
 
                     <button type="button" className="btn btn-dark btn-block redondeado">BOTON</button>
                     <hr/>
-                    <small className="">No tienes cuenta? <Link to="/access/signup">Registrate</Link></small>
+                    <small className="">No tienes cuenta? <Link to="/access/signup"><strong>Registrate</strong></Link></small>
                 </form>
             </div>
             

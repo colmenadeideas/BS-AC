@@ -24,7 +24,7 @@ export function loginAction(data) {
             .catch(error => {
                 console.log(error);
                 // Si  hay un error
-                dispatch( loginError() );
+                dispatch( loginError(error));
             })
     }
 }
@@ -39,5 +39,6 @@ export const loginSuccess = data => ({
 })
 
 export const loginError = error => ({
-    type: LOGIN_ERROR
+    type: LOGIN_ERROR,
+    payload: error
 })

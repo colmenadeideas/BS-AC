@@ -30,7 +30,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                error: true,
+                error: action.payload,
             }
         default:
             return state;
