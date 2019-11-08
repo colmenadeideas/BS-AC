@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './login.css'
+import './Login.css'
 
 //Redux
 import { loginAction } from '../../store/actions/loginAction'
@@ -44,7 +44,6 @@ const Login = ({history}) => {
 
     return ( 
         <div className="d-flex justify-content-center">
-            
             <div className="login-container">
                 <img src="../images/img_test.png" className="login_logo" alt="logo"/>
                 <h2 className="text-center mb-5">Espacio de texto</h2>
