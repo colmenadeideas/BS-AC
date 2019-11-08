@@ -33,7 +33,9 @@
 
 			return $timeAll;
 		}
-
+		public function hola(){
+			echo "hola mundo";
+		}
 		public function users ($action, $param1="",  $param2="") {
 			switch ($action) {
 				case 'list':

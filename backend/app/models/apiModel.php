@@ -1,4 +1,4 @@
-<?
+<?php
 	class apiModel extends Model {
 	
 		public function __construct() {

@@ -1,6 +1,6 @@
 <?php
 		//Path Info
-		define ('URL', "http://localhost/access/html/"); 
+		define ('URL', "http://localhost/BS-AC/backend/html/"); 
 
 		//Server Info
 		define ( 'DB_SERVER', 'localhost');
@@ -23,7 +23,7 @@
 		define ( 'DB_USER', 'root');
 		define ( 'DB_PASSWORD', 'root');
 		define ( 'DB_PASS', 'root');
-		define ( 'DB_NAME', 'access'); 
+		define ( 'DB_NAME', 'bs-ac'); 
 		define ( 'DB_PREFIX', '');	
 		define ( 'URL_EMAIL', '');	
 		
