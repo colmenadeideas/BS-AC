@@ -4,11 +4,22 @@
 		if (ini_get('magic_quotes_gpc')) {
 			$data = stripslashes($data);
 		}
-		$data = strip_tags($data, '<p><a><br>');
+        $data = strip_tags($data, '<p><a><br>');
+
+        //after
+        if(is_array($data)) 
+        return array_map(__METHOD__, $data); 
+
+        if(!empty($data) && is_string($data)) { 
+            return str_replace(array('\\', "\0", "\n", "\r", "'", '"', "\x1a"), array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'), $data); 
+        } 
+        return $data; 
+        
+        //before
 		//use this if local
-		//return mysql_real_escape_string($data);
+		//return mysqli_real_escape_string($data);
 		//use this for server
-		return mysql_escape_string($data); 
+		//return mysqli_escape_string ($data); 
 	}
 	
 	function create_slug($data) {

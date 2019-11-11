@@ -14,17 +14,17 @@ export function loginAction(data) {
         dispatch( loginRequest() );
 
         // Insertar en la API
-        axiosClient.post('/', data )
+        axiosClient.post('account/login', data )
             .then(response => {
                 console.log(response);
                 // Si se inserta correctamente
                 dispatch( loginSuccess(data) );
-                history.push('/access/dashboard')
+                //history.push('/access/dashboard')
             })
             .catch(error => {
                 console.log(error);
                 // Si  hay un error
-                dispatch( loginError(error));
+                dispatch(loginError(error));
             })
     }
 }

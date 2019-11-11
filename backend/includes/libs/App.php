@@ -12,7 +12,9 @@
 		
 		
 		public function init(){
-			//sets the $_url
+            //sets the $_url
+
+        
 			$this->_getUrl();
 			
 			@$this->_loadController($this->_url[0]);

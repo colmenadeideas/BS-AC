@@ -10,25 +10,29 @@
 	class accountController extends Controller {
 		
 		public function __construct() {
-			
+            header('Access-Control-Allow-Origin: http://localhost:3000');
+            header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+
 			parent::__construct();	
 		}
 	
 		public function index() {
-							
-			$this->signin();		
+
+            $this->signin();
+            //echo '1'		;
 		}
 		
 		// SIGNIN: verifies if User already logged in, if not shows login screen
 		public function signin() {
 			
-			 $already_loggedin = User::get('role');
+             $already_loggedin = User::get('role');
+             echo $already_loggedin;
 			
 			if (empty($already_loggedin)) {
 				
 				$this->view->title = SITE_NAME. " | " .SITE_NAME__SIGN_IN ;						
 				$this->view->render('login/index');
-				
+
 			} else {	
 				//Redirect		
 				$this->identify();
@@ -37,78 +41,88 @@
 		
 		// LOGIN: Method called by login form, process the form and returns authorization response from server
 		public function login() {
-				
-			$array_datos = array();	
-			foreach ($_POST as $key => $value) {
-				$campo = escape_value($key);
-				$valor = escape_value($value);
-				
-				$data = "\$" . $campo . "='" . escape_value($valor) . "';";						
-				eval($data);
-			}
-			
-				$username = $email;
-				$validUser = $this->user->validateUsername($username);
-				
-				if(empty($validUser)){						
-					//echo "error";				
-					$response["tag"] = "login";
-					$response["success"] = 0;
-					$response["error"] = 1;	
-		            $response["response"] = LOGIN_MESSAGE_ERROR;				
-					echo json_encode($response);
-					
-				} else {
-					
-					if (empty($accesstoken)) { //Regular login, else is coming from SocialNetwork login
-						$validPass = $this->user->validatePassword($username, $password);
-					} else {
-						$validPass = 'access__token'; //not empty
-					}					
-					
-					if(empty($validPass)){
-						//echo "error";
-						$response["tag"] = "login";
-						$response["success"] = 0;
-						$response["error"] = 1;	
-			            $response["response"] = LOGIN_MESSAGE_ERROR;	
-						echo json_encode($response);
-						
-					} else {
-						$role = escape_value($validUser[0]['role']);
-						$username = escape_value($validUser[0]['username']);
-						
-						$profile = $this->model->getAccount($role, $validUser[0]['id']);
-						
-						$this->user->init();
-				        $this->user->set('role', $role);
-						$this->user->set('loggedIn', true);
-						$this->user->set('OKey', escape_value($validUser[0]['id'])); //This is user ID
-				        $this->user->set('username', $username);
-						if (isset($accesstoken)) {
-							$this->user->set('socialnetwork', true);	
-						}	
-						
-						//Check session in here
-						User::checkSession();
-						$redirection = User::gotoMainArea(TRUE); //redirection will be done via JavaScript
+            $post = json_decode(file_get_contents('php://input'), true); //asi es como se extraen los datos que vienen por post de react
+            
+            $array_datos = array();	
+            //print_r($post);
+            $username = escape_value($post['username']);
+            $password = escape_value($post['password']);
+
+            //aqui esta por si lo quieres usar (para Alejandra)
+			// foreach ($post as $key => $value) {
+			// 	$campo = escape_value($key);
+			// 	$valor = escape_value($value);
+			// 	$array_datos .= "\$" . $campo . "='" . escape_value($valor) . "';";						
+			// 	//eval($array_datos);
+			// }
+
+            $validUser = $this->user->validateUsername($username);
+            //print_r($validUser);
+
+            if (empty($validUser)) {						
+                //echo "error";				
+                $response["tag"] = "login";
+                $response["success"] = 0;
+                $response["error"] = 1;	
+                //la constante no existe
+                //$response["response"] = LOGIN_MESSAGE_ERROR;				
+                echo json_encode($response);
+                
+            } else {
+                
+                $validPass = $this->user->validatePassword($username, $password);
+                print_r($validPass);
+                exit;
+                // if (empty($accesstoken)) { //Regular login, else is coming from SocialNetwork login
+                //     $validPass = $this->user->validatePassword($username, $password);
+                // } else {
+                //     $validPass = 'access__token'; //not empty
+                // }					
+
+                if(empty($validPass)){
+                    echo "error";
+                    $response["tag"] = "login";
+                    $response["success"] = 0;
+                    $response["error"] = 1;	
+                    $response["response"] = LOGIN_MESSAGE_ERROR;	
+                    echo json_encode($response);
+                    
+                } else {
+                    $role = escape_value($validUser[0]['role']);
+                    $username = escape_value($validUser[0]['username']);
+                    
+                    //no se para que es esto asi que lo omiti (para Alejandra)
+                    //$profile = $this->model->getAccount($role, $validUser[0]['id']);
+                    
+                    $this->user->init();
+                    $this->user->set('role', $role);
+                    $this->user->set('loggedIn', true);
+                    $this->user->set('OKey', escape_value($validUser[0]['id'])); //This is user ID
+                    $this->user->set('username', $username);
+                    if (isset($accesstoken)) {
+                        $this->user->set('socialnetwork', true);	
+                    }	
+                    
+                    //Check session in here
+                    User::checkSession();
+                    $redirection = User::gotoMainArea(TRUE); //redirection will be done via JavaScript
 
 
-						$response["tag"] = "login";
-						$response["success"] = 1;
-						$response["error"] = 0;	
-						$response["response"] = "welcome";
-						$response["redirection"] = $redirection."/#";		
-						$response["user"]["role"] = $role;
-						$response["user"]["uid"] = $validUser[0]['id'];
-						$response["user"]["name"] = $profile[0]['name'];
-			            $response["user"]["email"] = $username;						
-												
-						echo json_encode($response);
-										
-						exit;
-					}
-				}			
+                    $response["tag"] = "login";
+                    $response["success"] = 1;
+                    $response["error"] = 0;	
+                    $response["response"] = "welcome";
+                    $response["redirection"] = $redirection."/#";		
+                    $response["user"]["role"] = $role;
+                    $response["user"]["uid"] = $validUser[0]['id'];
+                    $response["user"]["name"] = $profile[0]['name'];
+                    $response["user"]["email"] = $username;						
+                                            
+                    echo json_encode($response);
+                                    
+                    exit;
+                }
+            }			
 				
 		}
 		
