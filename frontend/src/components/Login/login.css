@@ -3,7 +3,6 @@
     top: 15%;
     bottom: 20%;
     width: 320px;
-    /*text-align: center;*/
 }
 .login_logo{
     width: 150px;
@@ -17,7 +16,6 @@
 }
 .or div:nth-child(2) {
     margin: 0 2%;
-    /* width: 5%; */
 }
 .division {
     border: 0.5px solid #cacaca;
