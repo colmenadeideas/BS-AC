@@ -1,12 +1,20 @@
 import React from 'react';
 
-const DeviceInstall = ({history}) => {
+import { useDispatch/*, useSelector*/ } from 'react-redux';
+import { registerDeviceAction } from '../../store/actions/devicesAction'
 
+const DeviceInstall = ({history}) => {
+    
+    const dispatch = useDispatch();
+    
     const handleClick = (e) => {
         e.preventDefault()
 
-        history.push('/access/devices2');
+        const registerDevice = () => dispatch(registerDeviceAction())
+        registerDevice();
+        //history.push('/access/devices2');
     }
+
     return ( 
         <div className="row mt-5">
             <div className="col-lg-3 d-flex flex-column justify-content-center text-right">
