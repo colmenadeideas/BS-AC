@@ -5,7 +5,7 @@ import {
 } from '../constants'
 
 import axiosClient from '../../helpers/axios';
-//import history from '../../helpers/history';
+import history from '../../helpers/history';
 //import Swal from 'sweetalert2';
 
 // Hacer Login
@@ -16,10 +16,10 @@ export function loginAction(data) {
         // Insertar en la API
         axiosClient.post('account/login', data )
             .then(response => {
-                console.log(response);
+                console.log(response.data);
                 // Si se inserta correctamente
                 dispatch( loginSuccess(data) );
-                //history.push('/access/dashboard')
+                history.push('/access/dashboard')
             })
             .catch(error => {
                 console.log(error);
