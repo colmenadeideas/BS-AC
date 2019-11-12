@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import './Login.css'
 
 //Redux
+import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../store/actions/loginAction'
 import { validateFormAction, validationSuccess, validationError } from '../../store/actions/validateAction'
-import { useDispatch, useSelector } from 'react-redux';
 
 const Login = ({history}) => {
 
     //capturar los states
-    const loading = useSelector( state => state.login.loading);
+    //const loading = useSelector( state => state.login.loading);
     const errorLogin = useSelector( state => state.login.error);
     const errorValidate = useSelector( state => state.validate.error);
 
@@ -29,12 +29,14 @@ const Login = ({history}) => {
         const validateSuccess = () => dispatch(validationSuccess())
         const validateError = () => dispatch(validationError())
 
+        //Inicia la validacion del formulario
         validateForm();
 
         if(username.length < 4 || password.length < 4) {
+            //en caso de error
             validateError();
-
         } else {
+            //si todo sale bien
             validateSuccess();
             login({
                 username, password
