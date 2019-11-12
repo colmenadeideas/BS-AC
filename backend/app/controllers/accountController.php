@@ -70,8 +70,15 @@
                 
             } else {
                 
-                $validPass = $this->user->validatePassword($username, $password);
-                print_r($validPass);
+                //$validPass = $this->user->validatePassword($username, $password);
+                //print_r($validPass);
+                
+                /*prueba*/
+                    $response["tag"] = "login";
+                    $response["success"] = 1;
+                    $response["error"] = 0;	
+                    $response["response"] = "welcome";
+					echo json_encode($response);
                 exit;
                 // if (empty($accesstoken)) { //Regular login, else is coming from SocialNetwork login
                 //     $validPass = $this->user->validatePassword($username, $password);
