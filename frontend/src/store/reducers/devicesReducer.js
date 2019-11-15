@@ -1,29 +1,57 @@
 import {
-    DEVICE_REGISTER_REQUEST,
-    DEVICE_REGISTER_SUCCESS,
-    DEVICE_REGISTER_ERROR
+    GET_DEVICES_REQUEST,
+    GET_DEVICES_SUCCESS,
+    GET_DEVICES_ERROR,
+
+    GET_DEVICE_DETAILS_REQUEST,
+    GET_DEVICE_DETAILS_SUCCESS,
+    GET_DEVICE_DETAILS_ERROR,
+
+    DELETE_DEVICE_REQUEST,
+    DELETE_DEVICE_SUCCESS,
+    DELETE_DEVICE_ERROR
 } from '../constants'
 
 // state inicial para el modulo devices
 const initialState = {
+    devices: [],
     device: {},
     error: false,
 }
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case DEVICE_REGISTER_REQUEST:
+        //obtener los dispositivos registrados
+        case GET_DEVICES_REQUEST:
             return {
                 ...state,
                 error: false,
             }
-        case DEVICE_REGISTER_SUCCESS:
+        case GET_DEVICES_SUCCESS:
             return {
                 ...state,
                 error: false,
-                device: action.payload
+                devices: action.payload
             }
-        case DEVICE_REGISTER_ERROR:
+        case GET_DEVICES_ERROR:
+            return {
+                ...state,
+                error: true,
+            }
+
+        //eliminar un dispositivo
+        case DELETE_DEVICE_REQUEST:
+            return {
+                ...state,
+                error: false,
+            }
+        case DELETE_DEVICE_SUCCESS:
+            return {
+                ...state,
+                error: false,
+                devices: state.devices.filter( device => device.id !== action.payload )
+            }
+        case DELETE_DEVICE_ERROR:
             return {
                 ...state,
                 error: true,
