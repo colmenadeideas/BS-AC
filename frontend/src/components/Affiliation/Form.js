@@ -13,6 +13,14 @@ const Form = () => {
                             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
+                    <div>
+                        <h3>Necesitas Ayuda?</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br/>
+                            Ab odit vitae magni cum, saepe animi. <br/>
+                            dignissimos eum hic quam debitis voluptates? Tenetur porro consectetur. <br/>
+                            id maiores amet quia ea nobis!
+                        </p>
+                    </div>
                 </div>
                 <div className="col-9">
                     <h2>Informacion de la cuenta</h2>

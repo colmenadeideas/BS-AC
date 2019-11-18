@@ -9,16 +9,6 @@ import Dashboard from './components/Dashboard/Dashboard'
 import Devices from './components/Devices/Devices'
 
 class Router extends Component {
-    state = {
-        pathname: ''
-    }
-    pathname = (e) => {
-        if (e !== this.state.pathname) {
-            this.setState({
-                pathname: e
-            })
-        }
-    }
 
     render() { 
         return (  
