@@ -25,6 +25,8 @@
 	define ('MAIL_PORT', 465);	
 	define ( 'MAIL_PASSWORD', 'Ker$wr543');
 	define ('MAIL_SECURE','ssl');
+	//Email messanges 
+	define ('SYSTEM_USERNAME_NOT_EXISTS','Usuario no existe');
 	
 	define('GOOGLE_APIKEY', '');
 	

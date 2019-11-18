@@ -57,7 +57,7 @@ export function recoverPassAction(email) {
         dispatch( recoverPassRequest() )
         console.log(email);
         //enviar email a la API
-        axiosClient.post('account/recover', email )
+        axiosClient.post('account/recover', { email } )
             .then(response => {
                 console.log(response);
                 // Si se envia correctamente

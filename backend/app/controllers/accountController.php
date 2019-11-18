@@ -131,10 +131,7 @@
                 }
             }			
 				
-		}
-		
-		
-		
+		}	
 		
 		// AUTHENTICATE: Method called when user is verified via Email -after registration-, and is logging in for the first time	
 		public function authenticate($temp_password, $username) {
@@ -397,12 +394,13 @@
 		// RECOVER: Method called by form, checks user and triggers recovery by email password process
 		function recover($what='password'){
 			
-			$username = escape_value($_POST['recover-password']);
+			$post = json_decode(file_get_contents('php://input'), true); //asi es como se extraen los datos que vienen por post de react
+			$username = escape_value($post['email']);
 			//Check for username in Database
 			
-			$already_registered =	$this->model->getAccount('',$username, 'username');
+			$already_registered =	$this->model->getAccount('users',$username, 'username');
 			
-			
+			//print_r($already_registered);
 			if (empty($already_registered)) {
 				echo SYSTEM_USERNAME_NOT_EXISTS;
 			} else {
@@ -416,7 +414,7 @@
 				$message .= '<a href="'.URL.'account/authenticate/'.$temp_key.'/'.$username.'" style="color: #ffffff; font-size:16px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; text-decoration: none; line-height:40px; width:100%; display:inline-block">Cambiar Password</a>';				
 				$message .= PASSWORD_RECOVERY_MESSAGE_PART3;
 				$message .= SETTINGS_EMAIL_FOOTER;
-					
+				echo $message;
 				$this->email->sendMail($username, SYSTEM_EMAIL, PASSWORD_RECOVERY_SUBJECT , $message);
 				
 				echo PASSWORD_RECOVERY_SUCCESS_RESPONSE;
