@@ -23,7 +23,7 @@ const DeviceInstall = ({history}) => {
             </div>
             <div className="col-lg-2 d-flex flex-column justify-content-center">
                 <h3>Empecemos!</h3>
-                <button className="btn btn-dark redondeado mt-3">Descargar en PlayStore</button>
+                <a href="https://play.google.com/store?hl=es" className="btn btn-dark redondeado mt-3" target="_blank" rel="noopener noreferrer">Descargar en PlayStore</a>
             </div>
         </div>
      );
