@@ -1,0 +1,17 @@
+a.navbar-brand {
+    border: solid;
+    padding: 5px 20px;
+}
+.alert-bell {
+    display: -webkit-inline-box;
+}
+li.nav-item.dropdown.alert-active {
+    background-color: red;
+    border-radius: 5px;
+    box-shadow: -1px 1px 3px black;
+}
+
+.navbar {
+    padding-right: 0;
+    padding-left: 0;
+}
