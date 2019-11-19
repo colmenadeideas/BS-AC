@@ -8,6 +8,10 @@ import Login from './components/Login/Login'
 import Dashboard from './components/Dashboard/Dashboard'
 import Devices from './components/Devices/Devices'
 
+/*ale */
+import PaymentSuccess from './components/PaymentSuccess/PaymentSuccess'
+import FinishSetting from './components/FinishSetting/FinishSetting'
+/*end ale */
 class Router extends Component {
 
     render() { 
@@ -19,6 +23,10 @@ class Router extends Component {
                 <Route exact path="/access/affiliation/payplans" component={PayPlans} />
                 <Route exact path="/access/dashboard" component={Dashboard} />
                 <Route exact path="/access/devices" component={Devices} />
+                {/* ale */}
+                <Route exact path="/access/paymentsuccess" component={PaymentSuccess} />
+                <Route exact path="/access/finishsetting" component={FinishSetting} />
+                {/* end ale */}
             </Switch>
         );
     }
