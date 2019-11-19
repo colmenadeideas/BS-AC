@@ -7,7 +7,9 @@ const FinishSetting = () => {
             <h1 className="mt-5 text-center">¡Hola!</h1>
             <img src="../images/payment-check.png" className="img-fluid mx-auto" width="10%" alt="payment-check"/>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            <Link to="/" className="btn btn-dark btn-block  mb-3 w-25 text-center">¡Empecemos!</Link>
+            <div className="d-flex justify-content-center">
+                <Link to="/" className="btn btn-dark btn-block redondeado w-50 text-center">¡Empecemos!</Link>
+            </div>
         </div>
     );
 }
