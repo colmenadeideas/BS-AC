@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Navbar from '../Navbar/Navbar';
+import UserOrDevice from './UserOrDevice';
 
 const Dashboard = () => {
+
     return ( 
         <React.Fragment>
             <Navbar />
@@ -12,6 +14,7 @@ const Dashboard = () => {
                 {/* textos superiores*/}
                 <div className="col-md-12">
                     <h2>Bienvenido</h2>
+                    <button className="btn btn-dark" data-toggle="modal" data-target="#modalUserOrDevice">Abrir Popup</button>
                 </div>
                 <div className="col-md-12 mb-3">
                     <div className="row">
@@ -126,6 +129,8 @@ const Dashboard = () => {
                 </div>
                 {/* columna 3 */}
             </div>
+            <UserOrDevice />
+   
             
         </React.Fragment>
      );

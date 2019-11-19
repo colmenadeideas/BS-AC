@@ -110,7 +110,7 @@ const Login = ({history}) => {
                     <small className="">No tienes cuenta? <Link to="/access/signup"><strong>Registrate</strong></Link></small>
                 </div>
             </div>
-            {/* si la informacion es correcta loginState sera tru y pasara al dashboard */}
+            {/* si la informacion es correcta loginState sera true y pasara al dashboard */}
             {loginState 
                 ?   history.push('/access/dashboard') 
                 :   ""
