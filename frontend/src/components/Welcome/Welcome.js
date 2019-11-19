@@ -1,26 +1,34 @@
 import React from 'react';
 import './Welcome.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Welcome = () => {
     return (  
         <React.Fragment>
-            <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+            <div className="header">
+                <div className="access-logo">Logo</div>
+            </div>
+            <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel"  data-interval="false">
                 <ol className="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div className="carousel-inner">
-                    <div className="carousel-item active" data-interval="0">
+                    <div className="carousel-item active">
                         <div>
                             <h2>Titulo</h2>
                             <h5>Agrega tu logo</h5>
-                            <div className="logo"></div>
+                            <div className="logo">
+                                <div>
+                                    <FontAwesomeIcon icon="plus" />
+                                </div>
+                            </div>
                             <p>¿Como se llama tu empresa?</p>
                             <input type="text" placeholder="Respuesta"/>
                         </div>
                     </div>
-                    <div className="carousel-item" data-interval="0">
+                    <div className="carousel-item">
                         <div>
                             <h2>Titulo</h2>
                             <h5>Agrega tu logo</h5>
@@ -38,7 +46,7 @@ const Welcome = () => {
                             </div>
                         </div>  
                     </div>
-                    <div className="carousel-item" data-interval="0">   
+                    <div className="carousel-item">   
                         <div>
                             <h2>Titulo</h2>
                             <div className="logo"></div>

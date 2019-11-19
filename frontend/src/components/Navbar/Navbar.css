@@ -10,8 +10,11 @@ li.nav-item.dropdown.alert-active {
     border-radius: 5px;
     box-shadow: -1px 1px 3px black;
 }
-
 .navbar {
     padding-right: 0;
     padding-left: 0;
+}
+.dropdown-menu {
+    right: 0;
+    left: unset !important;
 }

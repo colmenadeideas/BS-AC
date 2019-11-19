@@ -1,10 +1,11 @@
 .carousel {
-    width: 48%;
+    width: 60%;
     margin: auto;
 }
 .container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
 }
 .carousel-item > div {
     display: flex !important;
@@ -17,12 +18,15 @@
 }
 .carousel-item h2 {
     margin-bottom: 25px;
+    font-size: 40px;
 }
 .carousel-item h5 {
     margin-bottom: 15px;
+    font-size: 23px;
 }
 .carousel-item p {
     margin-bottom: 10px;
+    font-size: 20px;
 }
 .carousel-item input {
     width: 250px;
@@ -30,32 +34,33 @@
     border: none;
     background: #ececec;
     padding: 3px 10px;
+    font-size: 20px;
 }
 .carousel-control-next, .carousel-control-prev {
-    opacity: unset;
+    opacity: unset !important;
 }
 .carousel-indicators {
     bottom: unset;
-    top: -10%;
+    top: -7%;
 }
 .carousel-indicators li {
     background-color: transparent;
-    border: 1px solid black;
-    height: 7px;
-    width: 7px;
+    border: 1px solid black !important;
+    height: 7px !important;
+    width: 7px !important;
     border-radius: 50%;
     margin-right: 0px;
-    opacity: unset;
+    opacity: unset !important;
     transition: all .3s;
 }
 .carousel-indicators li.active {
     background-color: #000;
 }
 .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e") !important;
 }
 .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e") !important;
 }
 .logo-div {
     display: flex;
@@ -70,19 +75,48 @@
     margin-bottom: 0px;
 }
 .logo {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     border: 2px solid black;
     border-radius: 50%;
     margin-bottom: 15px;
+    position: relative;
+}
+.logo > div {
+    position: absolute;
+    top: 0%;
+    right: 3%;
+    background: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo > div svg {
+    color: #FFF;
+    width: 10px !important;
 }
 .carousel-item:nth-child(3) > div  p:nth-child(5) {
     align-self: self-start;
 }
 .carousel-item:nth-child(3) > div p:nth-child(5) {
-    margin: 12px 0 0 19%;
+    margin: 12px 0 0 25%;
     align-self: flex-start;
 }
 .carousel-item > div {
-    min-height: 280px;
+    min-height: 350px;
+}
+.header {
+    position: absolute;
+    top: 50px;
+}
+.access-logo {
+    width: 100px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
 }

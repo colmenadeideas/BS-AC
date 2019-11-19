@@ -7,11 +7,14 @@ import Form from './components/Affiliation/Form'
 import Login from './components/Login/Login'
 import Dashboard from './components/Dashboard/Dashboard'
 import Devices from './components/Devices/Devices'
+import Welcome from './components/Welcome/Welcome'
+import AddEmployee from './components/AddEmployee/AddEmployee';
 
 /*ale */
 import PaymentSuccess from './components/PaymentSuccess/PaymentSuccess'
 import FinishSetting from './components/FinishSetting/FinishSetting'
 /*end ale */
+
 class Router extends Component {
 
     render() { 
@@ -27,6 +30,8 @@ class Router extends Component {
                 <Route exact path="/access/paymentsuccess" component={PaymentSuccess} />
                 <Route exact path="/access/finishsetting" component={FinishSetting} />
                 {/* end ale */}
+                <Route exact path="/access/welcome" component={Welcome} />
+                <Route exact path="/access/addemployee" component={AddEmployee} />
             </Switch>
         );
     }
