@@ -1,4 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import './Dashboard.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const UserOrDevice = () => {
@@ -13,13 +17,26 @@ const UserOrDevice = () => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <div class="container">
-                            <div class="row justify-content-md-center">
-                                <div class="col col-lg-4">
-                                    1 of 3
+                        <div className="container mb-3">
+                            <div className="row justify-content-md-center">
+                                <div className="col col-lg-5 d-flex flex-column align-items-center ">
+                                    <div className="border circle-userdevice">
+                                        <Link to="/" className="circle-icon-userdevice" data-dismiss="modal" aria-label="Close">
+                                            <FontAwesomeIcon icon={["fas", "plus"]} color="#ffffff"/>
+                                        </Link>
+                                        <FontAwesomeIcon icon="user" size="4x"/>
+                                    </div>
+                                    Texto Simulado
                                 </div>
-                                <div class="col col-lg-4">
-                                    3 of 3
+                                <div className="col-lg-1"></div>
+                                <div className="col col-lg-5 d-flex flex-column align-items-center ">
+                                    <div className="border circle-userdevice">
+                                        <Link to="/access/devices/install" className="circle-icon-userdevice" data-dismiss="modal">
+                                            <FontAwesomeIcon icon={['fas', 'plus']} color="#ffffff"/>
+                                        </Link>
+                                        <FontAwesomeIcon icon="mobile" size="4x"/>
+                                    </div>
+                                    Texto Simulado
                                 </div>
                             </div>
                         </div>
