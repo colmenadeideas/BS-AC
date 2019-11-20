@@ -12,7 +12,6 @@ import store from './store/store';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas, faTrash, faEye, faBars, faUser, faMobile, faBell, faCheck } from '@fortawesome/free-solid-svg-icons'
-import { faTrash, faEye, faBars, faUser, faMobile, faBell, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import Popper from 'popper.js';
