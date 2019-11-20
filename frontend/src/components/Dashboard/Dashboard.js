@@ -6,6 +6,8 @@ import UserOrDevice from './UserOrDevice';
 
 const Dashboard = () => {
 
+    const handleShow = () => true;
+
     return ( 
         <React.Fragment>
             <Navbar />
@@ -14,7 +16,6 @@ const Dashboard = () => {
                 {/* textos superiores*/}
                 <div className="col-md-12">
                     <h2>Bienvenido</h2>
-                    <button className="btn btn-dark" data-toggle="modal" data-target="#modalUserOrDevice">Abrir Popup</button>
                 </div>
                 <div className="col-md-12 mb-3">
                     <div className="row">
@@ -83,35 +84,28 @@ const Dashboard = () => {
 
                 {/* columna 2 */}    
                 <div className="col-md-6">
-                    
-                    <div className="row">
-                        <div className="border border-dark">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-12"> <p className="h5 mt-2">TEXTO SIMULADO</p></div>
-                                    <br/><br/>
-                                    <div className="col-md-12">
-                                        1 <br/>
-                                        2 <br/>
-                                        3 <br/>
-                                        4 <br/>
-                                        5 <br/>
-        
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-2 pl-4"></div>
-                                        <div className="col-md-2">texto</div>
-                                        <div className="col-md-2">texto</div>
-                                        <div className="col-md-2">texto</div>
-                                        <div className="col-md-2">texto</div>
-                                        <div className="col-md-2">texto</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="border border-dark row">
+                        <div className="col-md-12"> <p className="h5 mt-2">TEXTO SIMULADO</p></div>
+                        <br/><br/>
+                        <div className="col-md-12">
+                            1 <br/>
+                            2 <br/>
+                            3 <br/>
+                            4 <br/>
+                            5 <br/>
+
+                        </div>
+                        <div className="row">
+                            <div className="col-md-2 pl-4"></div>
+                            <div className="col-md-2">texto</div>
+                            <div className="col-md-2">texto</div>
+                            <div className="col-md-2">texto</div>
+                            <div className="col-md-2">texto</div>
+                            <div className="col-md-2">texto</div>
                         </div>
                     </div>
                     <div className="mt-3 row">
-                        <textarea name="notes" id="notes" cols="60" rows="4" defaultValue="Espacio de anotaciones"></textarea>
+                        <textarea name="notes" id="notes" cols="60" rows="4" placeholder="Espacio de anotaciones"></textarea>
                     </div>
                 </div>
                 {/* fin columna 2 */}
@@ -129,8 +123,7 @@ const Dashboard = () => {
                 </div>
                 {/* columna 3 */}
             </div>
-            <UserOrDevice />
-   
+            <UserOrDevice modalShow={handleShow}/>
             
         </React.Fragment>
      );

@@ -7,6 +7,7 @@ const DeviceInstall = ({history}) => {
 
     //     history.push('/access/devices');
     // }
+
     return ( 
         <div className="row mt-5">
             <div className="col-lg-4 d-flex flex-column justify-content-center text-right">
@@ -19,7 +20,7 @@ const DeviceInstall = ({history}) => {
             </div>
             <div className="col-lg-6 text-center">
                 <h1 className="mb-5 text-center col-sm-12">Instala tu Dispositivo</h1>
-                <img src="../images/img4.jpg" className="w-75" alt="mobile"/>
+                <img src={require('../images/img4.jpg')} className="w-75" alt="mobile"/>
             </div>
             <div className="col-lg-2 d-flex flex-column justify-content-center">
                 <h3>Empecemos!</h3>
