@@ -33,7 +33,7 @@ const Dashboard = () => {
                 {/* columna 1 */}
                 <div className="col-md-3">
                     
-                    <ul className="list-group">
+                    <ul className="list-group mb-2">
                         <li className="list-group-item list-group-item-dark">
                             Lista de Empleados
                         </li>
