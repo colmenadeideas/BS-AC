@@ -5,7 +5,7 @@ const Landing = () => {
 return ( 
     <div>
         Soy el Landing Page <br/>
-        <Link to="/access/affiliation/payplans">Ver planes</Link>
+        <Link to="/affiliation/payplans">Ver planes</Link>
     </div>
     );
 }

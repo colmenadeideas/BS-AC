@@ -1,7 +1,7 @@
 .user {
     width: 100px;
     height: 100px;
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -11,6 +11,51 @@
     width: 70px !important;
     height: 70px !important;
 }
-.col-2 {
+.user-img {
     position: relative;
+    width: 120px;
+    padding-right: 20px;
+    border-right: 2px solid black;
+    margin-bottom: 10px;
+}
+.agregar {
+    position: absolute;
+    top: 0;
+    right: 23px;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFF;
+}
+.col-2 {
+    width: 140px !important;
+    max-width: 140px !important;
+    flex: 0 0 140px !important;
+}
+.col-2 p {
+    font-size: 12px;
+}
+.col-2, h2 {
+    text-align: center;
+}
+h2 {
+    margin-bottom: 40px !important;
+}
+.col-7 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.col-7 input {
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+    background: #ececec;
+    padding: 5px 15px;
+    margin-bottom: 20px;
 }

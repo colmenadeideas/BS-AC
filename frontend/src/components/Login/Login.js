@@ -58,7 +58,7 @@ const Login = ({history}) => {
         <React.Fragment>
             <div className="d-flex justify-content-center">
                 <div className="login-container">
-                    <img src="../images/img_test.png" className="login_logo" alt="logo"/>
+                    <img src="/images/img_test.png" className="login_logo" alt="logo"/>
                     <h2 className="text-center mb-5">Espacio de texto</h2>
                     <form className="login-form" onSubmit={handleSubmitLogin}>
                         {/* si hay error de validacion */}
@@ -107,12 +107,12 @@ const Login = ({history}) => {
 
                     <button type="button" className="btn btn-dark btn-block redondeado">BOTON</button>
                     <hr/>
-                    <small className="">No tienes cuenta? <Link to="/access/signup"><strong>Registrate</strong></Link></small>
+                    <small className="">No tienes cuenta? <Link to="/signup"><strong>Registrate</strong></Link></small>
                 </div>
             </div>
             {/* si la informacion es correcta loginState sera true y pasara al dashboard */}
             {loginState 
-                ?   history.push('/access/dashboard') 
+                ?   history.push('/dashboard') 
                 :   ""
             }
 

@@ -26,7 +26,7 @@ const UserOrDevice = ({modalShow}) => {
                 <div className="row justify-content-md-center mb-3">
                     <div className="col col-lg-5 d-flex flex-column align-items-center ">
                         <div className="border circle-userdevice">
-                            <Link to="/access/addemployee" className="circle-icon-userdevice">
+                            <Link to="/addemployee" className="circle-icon-userdevice">
                                 <FontAwesomeIcon icon={["fas", "plus"]} color="#ffffff"/>
                             </Link>
                             <FontAwesomeIcon icon="user" size="4x"/>
@@ -37,7 +37,7 @@ const UserOrDevice = ({modalShow}) => {
                     <div className="col col-lg-5 d-flex flex-column align-items-center ">
                         <div className="border circle-userdevice">
                             {Math.floor(Math.random() * 2) === 1
-                                ?   <Link to="/access/devices/install" className="circle-icon-userdevice">
+                                ?   <Link to="/devices/install" className="circle-icon-userdevice">
                                         <FontAwesomeIcon icon={['fas', 'plus']} color="#ffffff"/>
                                     </Link>
                                 :   <div className="circle-icon-userdevice">

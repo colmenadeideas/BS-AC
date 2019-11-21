@@ -6,7 +6,7 @@ const DeviceInstall = ({history}) => {
     // const handleClick = (e) => {
     //     e.preventDefault()
 
-    //     history.push('/access/devices');
+    //     history.push('/devices');
     // }
 
     return ( 
@@ -34,17 +34,17 @@ const DeviceInstall = ({history}) => {
                         <div className="carousel-inner">
                             <div className="carousel-item active">
                                 <div>
-                                    <img src="../../images/img4.jpg" className="w-100" alt=""/> 
+                                    <img src="/images/img4.jpg" className="w-100" alt=""/> 
                                 </div>
                             </div>
                             <div className="carousel-item">
                                 <div>
-                                    <img src="../../images/img4.jpg" className="w-100" alt=""/> 
+                                    <img src="/images/img4.jpg" className="w-100" alt=""/> 
                                 </div>  
                             </div>
                             <div className="carousel-item">   
                                 <div>
-                                    <img src="../../images/img4.jpg" className="w-100" alt=""/>
+                                    <img src="/images/img4.jpg" className="w-100" alt=""/>
                                 </div> 
                             </div>
                         </div>
@@ -62,10 +62,10 @@ const DeviceInstall = ({history}) => {
                 <div className="col-lg-2 d-flex flex-column justify-content-center">
                     <h3>Empecemos!</h3>
                     <a href="https://play.google.com/store?hl=es" className="mt-3" target="_blank" rel="noopener noreferrer">
-                        <img src="../../images/download-google-play.png" className="w-100" alt=""/>
+                        <img src="/images/download-google-play.png" className="w-100" alt=""/>
                     </a>
                     <a href="https://www.apple.com/la/ios/app-store/" className="mt-3" target="_blank" rel="noopener noreferrer">
-                        <img src="../../images/download-app-store.png" className="w-100" alt=""/>
+                        <img src="/images/download-app-store.png" className="w-100" alt=""/>
                     </a>
                 </div>
             </div>

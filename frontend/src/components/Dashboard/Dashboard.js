@@ -118,7 +118,7 @@ const Dashboard = () => {
                     </div>
                     <div className="mt-2 d-flex flex-column align-items-center">
                         <small>Crear codigo QR</small>
-                        <Link to="/access/carnet/preview" className="rounded-circle bg-dark mt-2" style={{height: "70px", width: "70px"}}>
+                        <Link to="/carnet/preview" className="rounded-circle bg-dark mt-2" style={{height: "70px", width: "70px"}}>
                         
                         </Link>
                     </div>

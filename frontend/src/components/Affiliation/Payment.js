@@ -25,7 +25,7 @@ const Payment = ({history}) => {
         }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
                 console.log('I was closed by the timer') // eslint-disable-line
-                history.push("/access/affiliation/paymentsuccess")
+                history.push("/affiliation/paymentsuccess")
             }
         })
     }

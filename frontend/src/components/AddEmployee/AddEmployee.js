@@ -72,7 +72,9 @@ const AddEmployee = ({history}) => {
                         <p>Texto simulado</p>
                     </div>
                     <div className="col-7">
-
+                        <input type="text" placeholder="Nombre y apellido" required/>
+                        <input type="text" placeholder="Cedula" required/>
+                        <input type="text" placeholder="Cargo" required/>
                     </div>
                 </div>
                 <div><button className="btn btn-dark" onClick={addSchedule}>Agregar Horario</button></div>
