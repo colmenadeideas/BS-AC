@@ -5,7 +5,7 @@ const Form = ({history}) => {
     const handleSubmit = e => {
         e.preventDefault()
 
-        history.push('/access/affiliation/pay')
+        history.push('/access/affiliation/payment')
     }
 
     return ( 

@@ -43,7 +43,7 @@ const UserOrDevice = ({modalShow}) => {
                                 :   <div className="circle-icon-userdevice">
                                         <FontAwesomeIcon icon={['fas', 'check']} color="#ffffff"/>
                                     </div>
-                                }
+                            }
                             
                             <FontAwesomeIcon icon="mobile" size="4x"/>
                         </div>

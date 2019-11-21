@@ -1,9 +1,61 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import './AddEmployee.css'
 import Navbar from '../Navbar/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const AddEmployee = () => {
+const AddEmployee = ({history}) => {
+
+    const addSchedule = e => {
+        e.preventDefault()
+
+        let timerInterval
+        Swal.fire({
+            title: 'Horario Nuevo',
+            text: "Agregar Horario a Todos los empleados?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, agregar a todos!',
+            cancelButtonText: 'No, solo a este'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    title: 'Agregando a todos los empleados',
+                    html: '<b></b>',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                        Swal.getContent().querySelector('b')
+                            .textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        Swal.fire(
+                            'Enhorabuena!',
+                            'Todos sus empleados tienen horario',
+                            'success'
+                        )
+                    }
+                })
+            } else {
+                Swal.fire(
+                    'Agregado con Exito!',
+                    'Continue con los demas empleados',
+                    'success'
+                )
+            }
+        })
+    }
+
     return (  
         <React.Fragment>
             <Navbar />
@@ -23,6 +75,7 @@ const AddEmployee = () => {
 
                     </div>
                 </div>
+                <div><button className="btn btn-dark" onClick={addSchedule}>Agregar Horario</button></div>
             </div>
         </React.Fragment>
     );

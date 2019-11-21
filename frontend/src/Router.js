@@ -7,7 +7,8 @@ import Landing from './components/Landing/Landing'
 
 import PayPlans from './components/Affiliation/PayPlans'
 import Form from './components/Affiliation/Form'
-import Pay from './components/Affiliation/Pay'
+import Payment from './components/Affiliation/Payment'
+import PaymentSuccess from './components/Affiliation/PaymentSuccess'
 
 import Welcome from './components/Welcome/Welcome'
 import AddEmployee from './components/AddEmployee/AddEmployee';
@@ -15,8 +16,8 @@ import AddEmployee from './components/AddEmployee/AddEmployee';
 import Devices from './components/Devices/Devices'
 import DeviceInstall from './components/Devices/DeviceInstall'
 
-import PaymentSuccess from './components/PaymentSuccess/PaymentSuccess'
-import FinishSetting from './components/FinishSetting/FinishSetting'
+import Carnet from './components/Carnet/Carnet'
+import FinishSetting from './components/Welcome/FinishSetting'
 
 
 class Router extends Component {
@@ -30,16 +31,17 @@ class Router extends Component {
 
                 <Route exact path="/access/affiliation/form" component={Form} />
                 <Route exact path="/access/affiliation/payplans" component={PayPlans} />
-                <Route exact path="/access/affiliation/pay" component={Pay} /> 
+                <Route exact path="/access/affiliation/payment" component={Payment} /> 
+                <Route exact path="/access/affiliation/paymentsuccess" component={PaymentSuccess} />
                 
                 <Route exact path="/access/devices" component={Devices} />
                 <Route exact path="/access/devices/install" component={DeviceInstall} /> 
 
-                <Route exact path="/access/paymentsuccess" component={PaymentSuccess} />
-                <Route exact path="/access/finishsetting" component={FinishSetting} />
 
                 <Route exact path="/access/welcome" component={Welcome} />
                 <Route exact path="/access/addemployee" component={AddEmployee} />
+                <Route exact path="/access/selectcarnet" component={Carnet} />
+                <Route exact path="/access/finishsetting" component={FinishSetting} />
             </Switch>
         );
     }

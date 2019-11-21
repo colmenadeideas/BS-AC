@@ -1,7 +1,7 @@
 import React from 'react'
 import Swal from 'sweetalert2'
 
-const Pay = ({history}) => {
+const Payment = ({history}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -25,7 +25,7 @@ const Pay = ({history}) => {
         }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
                 console.log('I was closed by the timer') // eslint-disable-line
-                history.push("/access/dashboard")
+                history.push("/access/affiliation/paymentsuccess")
             }
         })
     }
@@ -38,4 +38,4 @@ const Pay = ({history}) => {
      );
 }
  
-export default Pay;
+export default Payment;

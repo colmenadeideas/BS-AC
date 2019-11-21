@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import './Welcome.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -53,6 +54,7 @@ const Welcome = () => {
                             <p>¿Como se llama tu empresa?</p>
                             <input type="text" placeholder="Respuesta"/>
                             <p>Texto simulado</p>
+                            <Link to="/access/selectcarnet" className="btn btn-dark">Guardar Datos</Link>
                         </div> 
                     </div>
                 </div>
