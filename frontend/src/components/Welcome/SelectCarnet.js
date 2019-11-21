@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-const Carnet = () => {
+const SelectCarnet = () => {
     return ( 
         <>
             <h1 className="mt-5">Carnets</h1>
@@ -32,4 +32,4 @@ const Carnet = () => {
     );
 }
  
-export default Carnet;
+export default SelectCarnet;

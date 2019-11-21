@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Navbar from '../Navbar/Navbar';
@@ -117,8 +118,9 @@ const Dashboard = () => {
                     </div>
                     <div className="mt-2 d-flex flex-column align-items-center">
                         <small>Crear codigo QR</small>
-                        <div className="rounded-circle bg-dark mt-2" style={{height: "70px", width: "70px"}}>
-                    </div>
+                        <Link to="/access/carnet/preview" className="rounded-circle bg-dark mt-2" style={{height: "70px", width: "70px"}}>
+                        
+                        </Link>
                     </div>
                 </div>
                 {/* columna 3 */}
