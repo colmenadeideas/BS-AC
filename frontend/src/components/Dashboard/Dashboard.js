@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Navbar from '../Navbar/Navbar';
 import UserOrDevice from './UserOrDevice';
 
-const Dashboard = () => {
+const Dashboard = ({history}) => {
 
     const handleShow = () => true;
 
     return ( 
         <React.Fragment>
-            <Navbar />
-            <div className="mt-5"></div>
+            <Navbar history={history} />
+            <div className=""></div>
             <div className="row">
                 {/* textos superiores*/}
                 <div className="col-md-12">

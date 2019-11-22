@@ -8,12 +8,7 @@ import { Modal } from 'react-bootstrap';
 
 const UserOrDevice = ({modalShow}) => {
 
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        setShow(true)
-
-    }, [modalShow])
+    const [show, setShow] = useState(true);
 
     const handleClose = () => setShow(false);
 

@@ -5,7 +5,7 @@ const Payment = ({history}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        
         let timerInterval
         Swal.fire({
             title: 'Su pago se esta procesando',
@@ -15,7 +15,7 @@ const Payment = ({history}) => {
             onBeforeOpen: () => {
                 Swal.showLoading()
                 timerInterval = setInterval(() => {
-                Swal.getContent().querySelector('b')
+                    Swal.getContent().querySelector('b')
                     .textContent = Swal.getTimerLeft()
                 }, 100)
             },
@@ -29,6 +29,7 @@ const Payment = ({history}) => {
             }
         })
     }
+    console.log(history);
     
     return ( 
         <div className="d-flex flex-column justify-content-center m-5">
