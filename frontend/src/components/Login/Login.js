@@ -12,6 +12,7 @@ const Login = ({history}) => {
     //recoger los valores de los inputs y los mete en un state
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [show, setShow] = useState(false);
 
     //capturar los states del reducer
     const loginState = useSelector( state => state.login.login);
@@ -29,6 +30,14 @@ const Login = ({history}) => {
     const closePopup = () => {
         dispatch(recoverPassCancel());
     }
+
+    //nuevas formas del modal
+    const handleShow = () => {
+        setShow(true);
+        setDeviceShow(device)
+        console.log(device);
+    }
+    const handleClose = () => setShow(false);
     
     const handleSubmitLogin = e => {
         e.preventDefault();

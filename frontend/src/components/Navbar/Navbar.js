@@ -22,12 +22,7 @@ const Navbar = ({history}) => {
             cancelButtonText: 'Continuar'
         }).then((result) => {
             if (result.value) {
-                Swal.fire(
-                    'Sesion Cerrada!',
-                    'Si quiere volver debe iniciar sesion.',
-                    'success'
-                )
-                history.push('/login');
+                history.push('/logout');
             }
         })
     }
@@ -47,7 +42,7 @@ const Navbar = ({history}) => {
                             <Link className="nav-link" to="/dashboard">Dashboard</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Link</Link>
+                            <Link className="nav-link" to="/devices">Dispositivos</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/">Link</Link>
@@ -67,7 +62,7 @@ const Navbar = ({history}) => {
                                     </div>
                                     
                                 </Link>
-                                <div className="dropdown-menu " aria-labelledby="navbarDropdown">
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item alert-success" to="/">Dispositivo registrado con exito</Link>
                                     <Link className="dropdown-item" to="/">Another action</Link>
                                     <div className="dropdown-divider"></div>

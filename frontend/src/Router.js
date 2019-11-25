@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import Landing from './components/Landing/Landing'
 import Login from './components/Login/Login'
+import Logout from './components/Logout/Logout'
+
 import Dashboard from './components/Dashboard/Dashboard'
 
 import PayPlans from './components/Affiliation/PayPlans'
@@ -21,7 +23,6 @@ import DeviceInstall from './components/Devices/DeviceInstall'
 import CarnetPreview from './components/Carnet/CarnetPreview'
 
 
-
 class Router extends Component {
 
     render() { 
@@ -29,6 +30,8 @@ class Router extends Component {
             <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Logout} />
+
                 <Route exact path="/dashboard" component={Dashboard} />
 
                 <Route exact path="/affiliation/form" component={Form} />
