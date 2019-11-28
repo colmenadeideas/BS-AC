@@ -5,7 +5,7 @@
 		function create_hash($password)	{
 		    // format: algorithm:iterations:salt:hash
 
-		    $salt = base64_encode(random_bytes(MCRYPT_DEV_URANDOM));
+		    $salt = base64_encode(random_bytes(15));
 		    return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" .  $salt . ":" . 
 		        base64_encode($this->pbkdf2(
 		            PBKDF2_HASH_ALGORITHM,
