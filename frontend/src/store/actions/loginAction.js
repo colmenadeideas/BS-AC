@@ -6,6 +6,11 @@ import {
     RECOVER_PASS_REQUEST,
     RECOVER_PASS_SUCCESS,
     RECOVER_PASS_ERROR,
+
+    AUTHENTICATE_PASS_REQUEST,
+    AUTHENTICATE_PASS_SUCCESS,
+    AUTHENTICATE_PASS_ERROR,
+    //account/update/password
 } from '../constants'
 
 import axiosClient from '../../helpers/axios';
@@ -50,7 +55,7 @@ export const loginError = error => ({
 })
 
 
-//Hacer el reestablecimiento de contrasena
+//Solicitar el reestablecimiento de contrasena
 export function recoverPassAction(email) {
     return (dispatch) => {
         dispatch( recoverPassRequest() )
@@ -84,5 +89,42 @@ export const recoverPassSuccess = data => ({
 
 export const recoverPassError = error => ({
     type: RECOVER_PASS_ERROR,
+    payload: error
+})
+
+// Hacer el reestablecimiento de la contrasena
+export function authenticateAction(data) {
+    return (dispatch) => {
+        dispatch( authenticateRequest() );
+
+        // Enviar en la API
+        axiosClient.post('account/update/password', data )
+            .then(response => {
+                console.log(response.data);
+                // Si se inserta correctamente
+                if (response.data['success'] === 1) {
+                    dispatch( authenticateSuccess("Contrasena reestablecida correctacmente") );
+                } else {
+                    dispatch(authenticateError("No se ha podido reestablecer la contrasena"));
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                // Si  hay un error
+                dispatch(loginError("Intente de nuevo, no disponible actualmente"));
+            })
+    }
+}
+export const authenticateRequest = () => ({
+    type: AUTHENTICATE_PASS_REQUEST
+});
+
+export const authenticateSuccess = data => ({
+    type: AUTHENTICATE_PASS_SUCCESS,
+    payload: data
+})
+
+export const authenticateError = error => ({
+    type: AUTHENTICATE_PASS_ERROR,
     payload: error
 })

@@ -6,6 +6,10 @@ import {
     RECOVER_PASS_REQUEST,
     RECOVER_PASS_SUCCESS,
     RECOVER_PASS_ERROR,
+
+    AUTHENTICATE_PASS_REQUEST,
+    AUTHENTICATE_PASS_SUCCESS,
+    AUTHENTICATE_PASS_ERROR,
 } from '../constants'
 
 // cada reducer tiene su propio state
@@ -60,6 +64,24 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 error: action.payload,
+            }
+
+        //casos cuando quiere autenticar la contrasena una vez que recibio el correo
+        case AUTHENTICATE_PASS_REQUEST:
+            return {
+                ...state,
+                login: false,
+                error: false,
+            }
+        case AUTHENTICATE_PASS_SUCCESS:
+            return {
+                ...state,
+                message: action.payload,
+            }
+        case AUTHENTICATE_PASS_ERROR:
+            return {
+                ...state,
+                error: action.payload
             }
 
         //por defecto devuelve el state inicial
