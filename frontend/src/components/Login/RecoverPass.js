@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { recoverPassAction } from '../../store/actions/loginAction'
 
-const RecoverPass = ({close}) => {
+const RecoverPass = ({show, close}) => {
 
     const error = useSelector( state => state.login.error)
     const message = useSelector( state => state.login.message)
@@ -21,7 +21,7 @@ const RecoverPass = ({close}) => {
     }
 
     return (
-        <Modal show={show} onHide={handleClose} animation={true} centered>
+        <Modal show={show} onHide={close} animation={true} centered>
             <Modal.Header closeButton>
                 <Modal.Title>Reestablecer Contraseña</Modal.Title>
             </Modal.Header>
@@ -31,7 +31,7 @@ const RecoverPass = ({close}) => {
                         <label htmlFor="inputEmail">Ingrese su correo o usuario</label>
                         <input 
                             type="text" 
-                            name="" 
+                            name="email" 
                             id="inputEmail" 
                             className="form-control"
                             placeholder="Usuario o email"

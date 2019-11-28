@@ -4,7 +4,6 @@ import {
     LOGIN_ERROR,
 
     RECOVER_PASS_REQUEST,
-    RECOVER_PASS_CANCEL,
     RECOVER_PASS_SUCCESS,
     RECOVER_PASS_ERROR,
 } from '../constants'
@@ -13,7 +12,6 @@ import {
 const initialState = {
     user: {},
     login: false,
-    recover: false,
     loading: false,
     message: false,
     error: false,
@@ -49,14 +47,7 @@ export default function(state = initialState, action) {
         case RECOVER_PASS_REQUEST:
             return {
                 ...state,
-                recover: true,
                 login: false,
-                error: false
-            }
-        case RECOVER_PASS_CANCEL:
-            return {
-                ...state,
-                recover: false,
                 error: false
             }
         case RECOVER_PASS_SUCCESS:

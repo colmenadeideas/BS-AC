@@ -4,7 +4,6 @@ import {
     LOGIN_ERROR,
 
     RECOVER_PASS_REQUEST,
-    RECOVER_PASS_CANCEL,
     RECOVER_PASS_SUCCESS,
     RECOVER_PASS_ERROR,
 } from '../constants'
@@ -77,10 +76,6 @@ export function recoverPassAction(email) {
 export const recoverPassRequest = () => ({
     type: RECOVER_PASS_REQUEST
 });
-
-export const recoverPassCancel = () => ({
-    type: RECOVER_PASS_CANCEL
-})
 
 export const recoverPassSuccess = data => ({
     type: RECOVER_PASS_SUCCESS,

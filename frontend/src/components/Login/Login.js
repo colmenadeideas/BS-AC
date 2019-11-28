@@ -5,7 +5,7 @@ import RecoverPass from './RecoverPass'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction, recoverPassRequest, recoverPassCancel } from '../../store/actions/loginAction'
+import { loginAction } from '../../store/actions/loginAction'
 import { validateFormAction, validationSuccess, validationError } from '../../store/actions/validateAction'
 
 const Login = ({history}) => {
@@ -16,27 +16,13 @@ const Login = ({history}) => {
 
     //capturar los states del reducer
     const loginState = useSelector( state => state.login.login);
-    const recoverState = useSelector( state => state.login.recover)
     const errorLogin = useSelector( state => state.login.error);
     const errorValidate = useSelector( state => state.validate.error);
 
     const dispatch = useDispatch();
 
-    //Para mostar el modal
-    const handleForgotPassword = (e) => {
-        dispatch(recoverPassRequest());
-    }
-    //Para ocultar el modal
-    const closePopup = () => {
-        dispatch(recoverPassCancel());
-    }
-
     //nuevas formas del modal
-    const handleShow = () => {
-        setShow(true);
-        setDeviceShow(device)
-        console.log(device);
-    }
+    const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     
     const handleSubmitLogin = e => {
@@ -107,7 +93,7 @@ const Login = ({history}) => {
                             :   <button type="submit" disabled className="btn btn-dark btn-block redondeado mb-3">BOTON LOGIN</button>
                         }
                     </form>
-                    <button onClick={handleForgotPassword} className="button-a">He olvidado mi contraseña</button>
+                    <button onClick={handleShow} className="button-a">He olvidado mi contraseña</button>
                     <div className="or mt-4 mb-2">
                         <div className="division"></div>
                         <div className="small">or</div>
@@ -125,10 +111,11 @@ const Login = ({history}) => {
                 :   ""
             }
 
-            {recoverState 
-                ?   <RecoverPass close={closePopup} /> 
-                :   ""
-            }    
+            <RecoverPass 
+                show={show} 
+                close={handleClose}
+            /> 
+   
         </React.Fragment>
     );
 

@@ -52,7 +52,6 @@ export function getDeviceDetailAction(id) {
 
         dispatch( getDeviceDetailSuccess(id) );
         dispatch( getDeviceDetailError() )
-
     }
 }
 export const getDeviceDetailRequest = () => ({
