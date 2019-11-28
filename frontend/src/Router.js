@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Landing from './components/Landing/Landing'
 import Login from './components/Login/Login'
+import ConfirmPass from './components/Login/ConfirmPass'
 import Logout from './components/Logout/Logout'
 
 import Dashboard from './components/Dashboard/Dashboard'
@@ -30,6 +31,7 @@ class Router extends Component {
             <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/authenticate/:id/:mail" component={ConfirmPass} />
                 <Route exact path="/logout" component={Logout} />
 
                 <Route exact path="/dashboard" component={Dashboard} />
