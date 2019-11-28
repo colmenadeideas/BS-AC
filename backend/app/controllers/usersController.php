@@ -79,7 +79,8 @@
 						$message .= SYSTEM_EMAIL__USER_ACTIVATION_MESSAGE_PART3;
 						$message .= SYSTEM_SIMPLE_EMAIL_FOOTER;
 						
-						$this->email->sendMail($array_user['username'], SYSTEM_EMAIL, ACTIVATION_USER_SUBJECT , $message);
+						//$this->email->sendMail($array_user['username'], SYSTEM_EMAIL, ACTIVATION_USER_SUBJECT , $message);
+						echo '<a href="'.URL.'account/authenticate/'.$temp_key.'/'.$array_user['username'].'" style="color: #ffffff; font-size:16px; font-weight: bold; font-family: Helvetica, Arial, sans-serif; text-decoration: none; line-height:40px; width:100%; display:inline-block">Activar Usuario</a>';
 					}
 				}			
 					
