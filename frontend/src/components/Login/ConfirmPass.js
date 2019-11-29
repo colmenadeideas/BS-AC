@@ -45,7 +45,7 @@ const ConfirmPass = () => {
         let path = document.location.pathname
         let params = path.split("/")
         setEmail(params[2])
-    }, [document.location.pathname])
+    }, [])
     
     return ( 
         <>
