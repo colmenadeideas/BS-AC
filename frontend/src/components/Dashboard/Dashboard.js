@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Navbar from '../Navbar/Navbar';
 import UserOrDevice from './UserOrDevice';
 
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { getEmployeesAction } from '../../store/actions/employeesAction'
+import { getDevicesAction } from '../../store/actions/devicesAction'
+
 const Dashboard = ({history}) => {
 
+    //state redux
+    const employees = useSelector( state => state.employees.employees);
+    const devices = useSelector( state => state.devices.devices);
+
+    console.log(devices);
+    const dispatch = useDispatch();
+
     const handleShow = () => true;
+
+    // consulta a la API los empleados y dispositivos (simula un componentDidMount)
+    useEffect(() => {
+        dispatch( getEmployeesAction() )
+        dispatch( getDevicesAction() )
+    }, [dispatch])
 
     return ( 
         <React.Fragment>
@@ -125,7 +143,7 @@ const Dashboard = ({history}) => {
                 </div>
                 {/* columna 3 */}
             </div>
-            <UserOrDevice modalShow={handleShow}/>
+            { (employees.length === 0 || devices.length === 0) && <UserOrDevice modalShow={handleShow} employees={employees} devices={devices} /> }
             
         </React.Fragment>
      );

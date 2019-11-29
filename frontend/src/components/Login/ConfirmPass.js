@@ -13,7 +13,7 @@ const ConfirmPass = () => {
 
     //capturar los states del reducer
     const error = useSelector( state => state.login.error);
-    const errorValidate = useSelector( state => state.validate.error);
+    //const errorValidate = useSelector( state => state.validate.error);
 
     const dispatch = useDispatch();
 

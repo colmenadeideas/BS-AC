@@ -15,13 +15,13 @@ import {
 import axiosClient from '../../helpers/axios';
 import Swal from 'sweetalert2';
 
-// Tarer la todos los dispositivos asociados a la cuenta
+// Traer la todos los dispositivos asociados a la cuenta
 export function getDevicesAction(data) {
     return (dispatch) => {
         dispatch( getDevicesRequest() );
 
         // Peticion a la API
-        axiosClient.get('/' )
+        axiosClient.get('/')
             .then(response => {
                 console.log(response);
                 // Si trae la informacion correctamente

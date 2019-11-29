@@ -22,13 +22,13 @@ export function loginAction(data) {
     return (dispatch) => {
         dispatch( loginRequest() );
 
-        // Insertar en la API
+        // Enviar a la API
         axiosClient.post('account/login', data )
             .then(response => {
                 console.log(response.data['success']);
                 // Si se inserta correctamente
                 if (response.data['success'] === 1) {
-                    dispatch( loginSuccess("Hemos enviado un correo para reestablecer su contrasena") );
+                    dispatch( loginSuccess(data) );
                 } else {
                     dispatch(loginError("Datos Incorrectos"));
                 }
