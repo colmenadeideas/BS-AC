@@ -6,6 +6,7 @@ import {
 
 // state inicial
 const initialState = {
+    form: "",
     error: false
 }
 
@@ -14,11 +15,13 @@ export default function(state = initialState, action) {
         case VALIDATE_FORM_REQUEST:
             return {
                 ...state,
+                form: action.payload,
                 error: false
             }
         case VALIDATE_FORM_SUCCESS:
             return {
                 ...state,
+                form: "",
                 error: false
             }
         case VALIDATE_FORM_ERROR:

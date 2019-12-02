@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 
-const AddSchedule = () => {
+//Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { validateFormAction, validationSuccess, validationError } from '../../store/actions/validateAction'
 
+const FormSchedule = ({submit}) => {
+
+    //crecaion de los states
     const [type, setType] = useState('')
     const [days, setDays] = useState([])
     const [since, setSince] = useState('')
     const [until, setUntil] = useState('')
+
+    const dispatch = useDispatch();
+    //Acciones necesarias para la validacion
+    const validateForm = form => dispatch(validateFormAction(form))
+    const validateSuccess = () => dispatch(validationSuccess())
+    const validateError = () => dispatch(validationError())
 
     const changeDays = e => {
         let newDay = e.target.value
@@ -19,64 +30,45 @@ const AddSchedule = () => {
         }
     }
 
-    const handleSubmitSche = e => {
+    const handleSubmit = e => {
         e.preventDefault()
 
-        console.log(type);
-        console.log(days);
+        //Inicio de la validacion
+        validateForm("FormSchedule")
 
-        let timerInterval
-        Swal.fire({
-            title: 'Horario Nuevo',
-            text: "Agregar Horario a Todos los empleados?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, agregar a todos!',
-            cancelButtonText: 'No, solo a este'
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    title: 'Agregando a todos los empleados',
-                    html: '<b></b>',
-                    timer: 1500,
-                    timerProgressBar: true,
-                    onBeforeOpen: () => {
-                        Swal.showLoading()
-                        timerInterval = setInterval(() => {
-                        Swal.getContent().querySelector('b')
-                            .textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    onClose: () => {
-                        clearInterval(timerInterval)
-                    }
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        Swal.fire(
-                            'Enhorabuena!',
-                            'Todos sus empleados tienen horario',
-                            'success'
-                        )
-                    }
-                })
-            } else {
-                Swal.fire(
-                    'Agregado con Exito!',
-                    'Continue con los demas empleados',
-                    'success'
-                )
+        if (type === '' || days.length < 3) {
+            //Si no pasa la validacion
+            validateError()
+        } else {
+            //Si pasa la validacion
+            validateSuccess()
+
+            if (type === "medio") {
+                setSince("8:00am")
+                setUntil("12:00pm")
             }
-        })
+            if (type === "completo") {
+                setSince("8:00am")
+                setUntil("5:00pm")
+            }
+
+            let schedule = {
+                type,
+                days,
+                since,
+                until
+            }
+            submit(schedule);
+        }
+
     }
 
-    //console.log(days);
-
+    
     return ( 
         <>
+        {console.log(type)}
             <h2>Agregar el horario</h2>
-            <form onSubmit={handleSubmitSche}>
+            <form onSubmit={handleSubmit}>
                 {/* radio */}
                 <div className="row justify-content-center">
                     <div className="col-9">
@@ -134,21 +126,27 @@ const AddSchedule = () => {
                         <br/><br/>
 
                         {/* inputs */}
-                        <h5 className="m-4">Seleccione las Horas</h5>
-                        <div className="form-row">
-                            <div className="col-3">
-                                <label className="sr-only" htmlFor="since">Desde</label>
-                                <input type="text" className="user__input" id="since" placeholder="desde" onChange={e => setSince(e.target.value)}/>
-                            </div>
-                            <div className="col-3">
-                                <label className="sr-only" htmlFor="until">Hasta</label>
-                                <input type="text" className="user__input" id="until" placeholder="hasta" onChange={e => setUntil(e.target.value)}/>
-                            </div>
-                        </div>
+                        {
+                            type === "personalizar" &&
+                            <>
+                                <h5 className="m-4">Seleccione las Horas</h5>
+                                <div className="form-row">
+                                    <div className="col-3">
+                                        <label className="sr-only" htmlFor="since">Desde</label>
+                                        <input type="text" className="user__input" id="since" placeholder="10:00am" onChange={e => setSince(e.target.value)}/>
+                                    </div>
+                                    <div className="col-3">
+                                        <label className="sr-only" htmlFor="until">Hasta</label>
+                                        <input type="text" className="user__input" id="until" placeholder="5:00pm" onChange={e => setUntil(e.target.value)}/>
+                                    </div>
+                                </div>
+                            </>
+                        }
 
                     </div>
                 </div>
 
+                { since && until}
                 <button type="submit" className="btn btn-dark" >Agregar Horario</button>
             </form>
 
@@ -156,4 +154,4 @@ const AddSchedule = () => {
     );
 }
  
-export default AddSchedule;
+export default FormSchedule;

@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom'
 // import history from '../../helpers/history'
 import './Navbar.css';
 
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Swal from 'sweetalert2'
 
+//Redux
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../../store/actions/loginAction'
+
 const Navbar = ({history}) => {
+
+    const dispatch = useDispatch();
 
     const handleLogout = () => {
 
@@ -22,7 +27,10 @@ const Navbar = ({history}) => {
             cancelButtonText: 'Continuar'
         }).then((result) => {
             if (result.value) {
-                history.push('/logout');
+                let res = dispatch(logoutAction());
+                if (res === 1) {
+                    history.push('/logout');  
+                }
             }
         })
     }

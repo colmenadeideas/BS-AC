@@ -10,11 +10,14 @@ import {
     AUTHENTICATE_PASS_REQUEST,
     AUTHENTICATE_PASS_SUCCESS,
     AUTHENTICATE_PASS_ERROR,
-    //account/update/password
+    
+    LOGOUT_REQUEST,
+    LOGOUT_SUCCESS,
+    LOGOUT_ERROR
 } from '../constants'
 
 import axiosClient from '../../helpers/axios';
-//import history from '../../helpers/history';
+import history from '../../helpers/history';
 //import Swal from 'sweetalert2';
 
 // Hacer Login
@@ -43,12 +46,10 @@ export function loginAction(data) {
 export const loginRequest = () => ({
     type: LOGIN_REQUEST
 });
-
 export const loginSuccess = data => ({
     type: LOGIN_SUCCESS,
     payload: data
 })
-
 export const loginError = error => ({
     type: LOGIN_ERROR,
     payload: error
@@ -81,12 +82,10 @@ export function recoverPassAction(email) {
 export const recoverPassRequest = () => ({
     type: RECOVER_PASS_REQUEST
 });
-
 export const recoverPassSuccess = data => ({
     type: RECOVER_PASS_SUCCESS,
     payload: data
 })
-
 export const recoverPassError = error => ({
     type: RECOVER_PASS_ERROR,
     payload: error
@@ -118,13 +117,49 @@ export function authenticateAction(data) {
 export const authenticateRequest = () => ({
     type: AUTHENTICATE_PASS_REQUEST
 });
-
 export const authenticateSuccess = data => ({
     type: AUTHENTICATE_PASS_SUCCESS,
     payload: data
 })
-
 export const authenticateError = error => ({
     type: AUTHENTICATE_PASS_ERROR,
     payload: error
 })
+
+//cerrar la sesion
+export function logoutAction() {
+    return (dispatch) => {
+        dispatch( logoutRequest() );
+
+        // Enviar a la API
+        axiosClient.post('account/logout')
+            .then(response => {
+                console.log(response.data['success']);
+                // Si se cierra correctamente la sesion
+                if (response.data['success'] === 1) {
+                    dispatch( logoutSuccess() );
+
+                } else {
+                    dispatch(logoutError("No se ha podido cerrar su sesion"));
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                // Si hay un error
+                dispatch(logoutError("Intente de nuevo, no disponible actualmente"));
+            })
+        return 1;
+    }
+}
+export const logoutRequest = () => ({
+    type: LOGOUT_REQUEST
+});
+export const logoutSuccess = () => ({
+    type: LOGOUT_SUCCESS
+});
+export const logoutError = error => ({
+    type: LOGOUT_ERROR,
+    payload: error
+})
+
+    

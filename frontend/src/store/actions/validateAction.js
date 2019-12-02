@@ -4,16 +4,17 @@ import {
     VALIDATE_FORM_ERROR
 } from '../constants';
 
-export function validateFormAction(){
+export function validateFormAction(form){
     return dispatch => {
-        dispatch( initValidation() )
+        console.log(form);
+        dispatch( initValidation(form) )
     }
 }
 
-
-export const initValidation = () => {
+export const initValidation = (form) => {
     return {
-        type: VALIDATE_FORM_REQUEST
+        type: VALIDATE_FORM_REQUEST,
+        payload: form
     }
 }
 export const validationSuccess = () => {

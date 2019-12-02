@@ -6,11 +6,14 @@ import {
     ADD_EMPLOYEE_REQUEST,
     ADD_EMPLOYEE_SUCCESS,
     ADD_EMPLOYEE_ERROR,
+
+    ADD_SCHEDULE_REQUEST,
+    ADD_SCHEDULE_SUCCESS,
+    ADD_SCHEDULE_ERROR,
 }
 from '../constants'
 
 import axiosClient from '../../helpers/axios';
-import Swal from 'sweetalert2';
 
 //funciones para traer a todos los empleados de base de datos
 export function getEmployeesAction() {
@@ -60,21 +63,12 @@ export function addEmployeeAction(data) {
                 console.log(response);
                 // Si se inserta correctamente el empleado
                 dispatch( addEmployeeSuccess(data) );
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Agregado exitoso',
-                    text: 'Hay un nuevo empleado!',
-                })
+                return 1;
             })
             .catch(error => {
                 console.log(error);
                 // Si hay un error al insertarlo
                 dispatch( addEmployeeError());
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Agregado fallido',
-                    text: 'Intente de nuevo mas tarde!',
-                })
             })
     }
 }
@@ -87,4 +81,35 @@ export const addEmployeeSuccess = (data) => ({
 })
 export const addEmployeeError = () => ({
     type: ADD_EMPLOYEE_ERROR
+})
+
+// funciones para agregar el horario de un empleado
+export function addScheduleAction(data) {
+    return (dispatch) => {
+        dispatch( addScheduleRequest() );
+
+        // Peticion de insercion a la API
+        axiosClient.post('/', data)
+            .then(response => {
+                console.log(response);
+                // Si se inserta correctamente el empleado
+                dispatch( addScheduleSuccess(data) );
+                return 1;
+            })
+            .catch(error => {
+                console.log(error);
+                // Si hay un error al insertarlo
+                dispatch( addScheduleError());
+            })
+    }
+}
+export const addScheduleRequest = () => ({
+    type: ADD_SCHEDULE_REQUEST
+})
+export const addScheduleSuccess = (data) => ({
+    type: ADD_SCHEDULE_SUCCESS,
+    payload: data
+})
+export const addScheduleError = () => ({
+    type: ADD_SCHEDULE_ERROR
 })

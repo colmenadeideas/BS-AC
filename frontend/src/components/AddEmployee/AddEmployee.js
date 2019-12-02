@@ -1,131 +1,116 @@
-import React, { useState } from 'react';
-//import { Link } from 'react-router-dom'
+import React from 'react';
+import Swal from 'sweetalert2'
 import './AddEmployee.css'
 import Navbar from '../Navbar/Navbar'
-import AddSchedule from './AddSchedule'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import FormEmployee from './FormEmployee'
+import FormSchedule from './FormSchedule'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addEmployeeAction } from '../../store/actions/employeesAction'
-import { validateFormAction, validationSuccess, validationError } from '../../store/actions/validateAction'
+import { addEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
 
 const AddEmployee = ({history}) => {
 
-    //creacion de los states
-    const [image, setImage] = useState('')
-    const [name, setName] = useState('')
-    const [ci, setCi] = useState('')
-    const [position, setPosition] = useState('')
-
-    //state de redux
-    const errorValidate = useSelector( state => state.validate.error);
-
     const dispatch = useDispatch();
+    
+    const addSche = data => dispatch(addScheduleAction(data))
+    const addEmp = data => dispatch(addEmployeeAction(data))
+    
+    //variable para evaluar la respuesta de la API
+    let res = -1
 
-    const previewFile = () => {
-        var file    = document.querySelector('input[type=file]').files[0];
-        var reader  = new FileReader();
-        if (file) {
-            reader.readAsDataURL(file);
-            //console.log(reader)
-        }
-        reader.onloadend = function () {
-          setImage(reader.result)
+    const submitEmployee = data => {
+        console.log(data);
+
+        res = addEmp(data)
+
+        if (res === 1) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Agregado exitoso',
+                text: 'Hay un nuevo empleado!',
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Agregado fallido',
+                text: 'Intente de nuevo mas tarde!',
+            })
         }
     }
 
-    const handleSubmitEmp = (e) => {
-        e.preventDefault()
-        console.log("submit");
-        
-        //Acciones necesarias para el login
-        const addEmployee = data => dispatch(addEmployeeAction(data))
-        const validateForm = () => dispatch(validateFormAction())
-        const validateSuccess = () => dispatch(validationSuccess())
-        const validateError = () => dispatch(validationError())
+    const submitSchedule = data => {
+        console.log(data)
 
-         //Inicia la validacion del formulario
-         validateForm();
-
-         //modificar posteriormente las validaciones a como seran finalmente
-         if(name.length < 2 || ci.length < 2) {
-             //en caso de error
-             validateError();
-         } else {
-             //si todo sale bien
-             validateSuccess();
-             addEmployee({
-                 image,
-                 name,
-                 ci, 
-                 position
-             })
-         }
+        let timerInterval
+        Swal.fire({
+            title: 'Horario Nuevo',
+            text: "Agregar Horario a Todos los empleados?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, agregar a todos!',
+            cancelButtonText: 'No, solo a este'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    title: 'Agregando a todos los empleados',
+                    html: '<b></b>',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                        Swal.getContent().querySelector('b')
+                            .textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        res = addSche(data);
+                        if (res === 1) {
+                            Swal.fire(
+                                'Enhorabuena!',
+                                'Todos sus empleados tienen horario',
+                                'success'
+                            )
+                        }
+                    }
+                })
+            } else {
+                res = addSche(data);
+                if (res === 1) {
+                    Swal.fire(
+                        'Agregado con Exito!',
+                        'Continue con los demas empleados',
+                        'success'
+                    )
+                }
+            }
+            if (res !== 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Agregado fallido',
+                    text: 'Intente de nuevo mas tarde!',
+                })
+            }
+        })
     }
 
     return (  
         <React.Fragment>
-            <Navbar />
+            <Navbar history={history}/>
             <div>
-                <h2>Empecemos a agregar tus empleados</h2>
-                <form onSubmit={handleSubmitEmp}>
-                    <div className="row justify-content-center">
-                        <div className="col-2">
-                            <div className="user__file">
-                                {
-                                    image 
-                                        ?   <img className="user-img" src={image} alt=""/>
-                                        :   <>
-                                                <div className="user-icon">
-                                                    <FontAwesomeIcon icon="user" />
-                                                </div>
-                                                <input 
-                                                    type="file" 
-                                                    className="input-image" 
-                                                    id="fileImage" 
-                                                    //value={image}
-                                                    onChange={previewFile}
-                                                    required
-                                                />
-                                                <label className="agregar" htmlFor="fileImage"><FontAwesomeIcon icon="plus" /></label>
-                                            </>
-                                }
-                            </div>
-                            <p>Texto simulado</p>
-                        </div>
-                        <div className="col-7">
-                            <input 
-                                type="text"
-                                className="user__input"
-                                value={name}
-                                onChange={e => setName(e.target.value)}
-                                placeholder="Nombre y apellido" 
-                                required
-                            />
-                            <input 
-                                type="text" 
-                                className="user__input"
-                                value={ci}
-                                onChange={e => setCi(e.target.value)}
-                                placeholder="Cedula" 
-                                required
-                            />
-                            <input 
-                                type="text" 
-                                className="user__input"
-                                value={position}
-                                onChange={e => setPosition(e.target.value)}
-                                placeholder="Cargo" 
-                                required
-                            />
-                        </div>
-                    </div>
-                    { errorValidate && <div className="alert alert-danger m-2">Debe tener un minimo de 6 caracteres</div> }
-                    <button type="submit" className="btn btn-dark m-2">Agregar Empleado</button>
-                </form>
-                <AddSchedule />
+                <FormEmployee 
+                    submit={submitEmployee}
+                />
+                <FormSchedule 
+                    submit={submitSchedule}
+                />
             </div>
         </React.Fragment>
     );

@@ -10,6 +10,10 @@ import {
     AUTHENTICATE_PASS_REQUEST,
     AUTHENTICATE_PASS_SUCCESS,
     AUTHENTICATE_PASS_ERROR,
+
+    LOGOUT_REQUEST,
+    LOGOUT_SUCCESS,
+    LOGOUT_ERROR
 } from '../constants'
 
 // cada reducer tiene su propio state
@@ -27,6 +31,7 @@ export default function(state = initialState, action) {
         case LOGIN_REQUEST:
             return {
                 ...state,
+                user: {},
                 login: false,
                 loading: true,
                 error: false,
@@ -42,6 +47,7 @@ export default function(state = initialState, action) {
         case LOGIN_ERROR:
             return {
                 ...state,
+                user: {},
                 login: false,
                 loading: false,
                 error: action.payload,
@@ -82,6 +88,27 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 error: action.payload
+            }
+
+        //casos para cerrar la sesion
+        case LOGOUT_REQUEST:
+            return {
+                ...state,
+                login: true,
+                error: false
+            }
+        case LOGOUT_SUCCESS:
+            return {
+                ...state,
+                user: {},
+                login: false,
+                error: false
+            }
+        case LOGOUT_ERROR:
+            return {
+                ...state,
+                login: true,
+                error: true
             }
 
         //por defecto devuelve el state inicial

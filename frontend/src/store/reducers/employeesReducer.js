@@ -6,12 +6,17 @@ import {
     ADD_EMPLOYEE_REQUEST,
     ADD_EMPLOYEE_SUCCESS,
     ADD_EMPLOYEE_ERROR,
+
+    ADD_SCHEDULE_REQUEST,
+    ADD_SCHEDULE_SUCCESS,
+    ADD_SCHEDULE_ERROR,
 } from '../constants'
 
 //state inicial para el modulo de empleados
 const initialState = {
     employees: [],
     employee: {},
+    schedule: {},
     error: false,
 }
 
@@ -48,6 +53,23 @@ export default function (state = initialState, action) {
                 employees: [...state.employees, action.payload]
             }
         case ADD_EMPLOYEE_ERROR:
+            return {
+                ...state,
+                error: true,
+            }
+
+        // casos para agregar el horario de un empleado
+        case ADD_SCHEDULE_REQUEST:
+            return {
+                ...state,
+                error: false,
+            }
+        case ADD_SCHEDULE_SUCCESS:
+            return {
+                ...state,
+                schedule: action.payload,
+            }
+        case ADD_SCHEDULE_ERROR:
             return {
                 ...state,
                 error: true,
