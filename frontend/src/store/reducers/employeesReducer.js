@@ -7,6 +7,10 @@ import {
     ADD_EMPLOYEE_SUCCESS,
     ADD_EMPLOYEE_ERROR,
 
+    EDIT_EMPLOYEE_REQUEST,
+    EDIT_EMPLOYEE_SUCCESS,
+    EDIT_EMPLOYEE_ERROR,
+
     ADD_SCHEDULE_REQUEST,
     ADD_SCHEDULE_SUCCESS,
     ADD_SCHEDULE_ERROR,
@@ -20,8 +24,8 @@ import {
 const initialState = {
     employees: [],
     employee: {},
-    carnet: {},
     schedule: {},
+    carnet: {},
     error: false
 }
 
@@ -58,6 +62,24 @@ export default function (state = initialState, action) {
                 employees: [...state.employees, action.payload]
             }
         case ADD_EMPLOYEE_ERROR:
+            return {
+                ...state,
+                error: true,
+            }
+        // casos para editar un empleado
+        case EDIT_EMPLOYEE_REQUEST:
+            return {
+                ...state,
+                error: false
+            }
+        case EDIT_EMPLOYEE_SUCCESS:
+            let emps = state.employees.filter( emp => emp.id !== action.id)
+            return {
+                ...state,
+                employee: action.payload,
+                employees: [emps, action.payload]
+            }
+        case EDIT_EMPLOYEE_ERROR:
             return {
                 ...state,
                 error: true,

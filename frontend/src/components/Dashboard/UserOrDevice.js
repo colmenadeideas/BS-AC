@@ -21,7 +21,7 @@ const UserOrDevice = ({modalShow, employees, devices}) => {
                     <div className="col col-lg-5 d-flex flex-column align-items-center ">
                         <div className="border circle-userdevice">
                             {employees.lenght !== 0
-                                ?   <Link to="/addemployee" className="circle-icon-userdevice">
+                                ?   <Link to="/Employee" className="circle-icon-userdevice">
                                         <FontAwesomeIcon icon={["fas", "plus"]} color="#ffffff"/>
                                     </Link>
                                 :   <div className="circle-icon-userdevice">

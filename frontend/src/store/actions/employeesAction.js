@@ -7,6 +7,10 @@ import {
     ADD_EMPLOYEE_SUCCESS,
     ADD_EMPLOYEE_ERROR,
 
+    EDIT_EMPLOYEE_REQUEST,
+    EDIT_EMPLOYEE_SUCCESS,
+    EDIT_EMPLOYEE_ERROR,
+
     ADD_SCHEDULE_REQUEST,
     ADD_SCHEDULE_SUCCESS,
     ADD_SCHEDULE_ERROR,
@@ -85,6 +89,38 @@ export const addEmployeeSuccess = (data) => ({
 })
 export const addEmployeeError = () => ({
     type: ADD_EMPLOYEE_ERROR
+})
+
+//funciones para editar un empleado
+export function editEmployeeAction(id, data) {
+    return (dispatch) => {
+        dispatch( editEmployeeRequest() );
+
+        // Peticion de edicion a la API
+        axiosClient.post('/', id, data)
+            .then(response => {
+                console.log(response);
+                // Si se edita correctamente el empleado
+                dispatch( editEmployeeSuccess(id, response.data) );
+                return 1;
+            })
+            .catch(error => {
+                console.log(error);
+                // Si hay un error 
+                dispatch( editEmployeeError());
+            })
+    }
+}
+export const editEmployeeRequest = () => ({
+    type: EDIT_EMPLOYEE_REQUEST
+})
+export const editEmployeeSuccess = (id, data) => ({
+    type: EDIT_EMPLOYEE_SUCCESS,
+    id,
+    payload: data
+})
+export const editEmployeeError = () => ({
+    type: EDIT_EMPLOYEE_ERROR
 })
 
 // funciones para agregar el horario de un empleado

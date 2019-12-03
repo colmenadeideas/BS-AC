@@ -1,41 +1,48 @@
-import React from 'react';
+import React /*, { useEffect }*/ from 'react';
 import Swal from 'sweetalert2'
-import './AddEmployee.css'
+import './Employees.css'
 import Navbar from '../Navbar/Navbar'
 import FormEmployee from './FormEmployee'
 import FormSchedule from './FormSchedule'
 
 //Redux
 import { useDispatch } from 'react-redux';
-import { addEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
+import { addEmployeeAction, editEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
 
-const AddEmployee = ({history}) => {
+//posteriormente el empToEdit vendra como prop al seleccionar el empleado a editar en otra pagina
+const Employee = ({history /*, empToEdit*/}) => { 
 
     const dispatch = useDispatch();
-    
-    const addSche = data => dispatch(addScheduleAction(data))
+
     const addEmp = data => dispatch(addEmployeeAction(data))
-    
+    const editEmp = (id, data) => dispatch(editEmployeeAction(id, data))
+
+    const addSche = data => dispatch(addScheduleAction(data))
+
     //variable para evaluar la respuesta de la API
     let res = -1
 
-    const submitEmployee = data => {
+    const submitEmployee = (action, data, id) => {
         console.log(data);
 
-        res = addEmp(data)
-
-        if (res === 1) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Agregado exitoso',
-                text: 'Hay un nuevo empleado!',
-            })
+        if (action === 'add') {
+            res = addEmp(data)
+    
+            if (res === 1) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Agregado exitoso',
+                    text: 'Hay un nuevo empleado!',
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Agregado fallido',
+                    text: 'Intente de nuevo mas tarde!',
+                })
+            }
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Agregado fallido',
-                text: 'Intente de nuevo mas tarde!',
-            })
+            editEmp(id, data)
         }
     }
 
@@ -107,12 +114,15 @@ const AddEmployee = ({history}) => {
         })
     }
 
+    const empToEdit = ''
+
     return (  
         <React.Fragment>
             <Navbar history={history} />
             <div>
                 <FormEmployee 
                     submit={submitEmployee}
+                    empToEdit={empToEdit}
                 />
                 <FormSchedule 
                     submit={submitSchedule}
@@ -122,4 +132,4 @@ const AddEmployee = ({history}) => {
     );
 }
  
-export default AddEmployee;
+export default Employee;

@@ -14,9 +14,10 @@ import Payment from './components/Affiliation/Payment'
 import PaymentSuccess from './components/Affiliation/PaymentSuccess'
 
 import Welcome from './components/Welcome/Welcome'
-import AddEmployee from './components/AddEmployee/AddEmployee';
 import SelectCarnet from './components/Welcome/SelectCarnet'
 import FinishSetting from './components/Welcome/FinishSetting'
+
+import Employee from './components/Employees/Employee';
 
 import Devices from './components/Devices/Devices'
 import DeviceInstall from './components/Devices/DeviceInstall'
@@ -42,7 +43,7 @@ class Router extends Component {
                 <Route exact path="/affiliation/paymentsuccess" component={PaymentSuccess} />
                 
                 <Route exact path="/welcome" component={Welcome} />
-                <Route exact path="/addemployee" component={AddEmployee} />
+                <Route exact path="/employee" component={Employee} />
                 <Route exact path="/selectcarnet" component={SelectCarnet} />
                 <Route exact path="/finishsetting" component={FinishSetting} />
 

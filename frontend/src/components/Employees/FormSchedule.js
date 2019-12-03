@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import { validateFormAction, validationSuccess, validationError } from '../../st
 const FormSchedule = ({submit}) => {
 
     //crecaion de los states
+    const [action, setAction] = useState('add')
+    const [id, setId] = useState('')
     const [type, setType] = useState('')
     const [days, setDays] = useState([])
     const [since, setSince] = useState('')
@@ -33,25 +35,18 @@ const FormSchedule = ({submit}) => {
         }
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
 
         //Inicio de la validacion
         validateForm("FormSchedule")
-
+        
         if (type === '' || days.length < 3) {
             //Si no pasa la validacion
             validateError()
         } else {
             //Si pasa la validacion
             validateSuccess()
-
-            if (type === "medio") {
-                setSince("8:00am"); setUntil("12:00pm")
-            }
-            if (type === "completo") {
-                setSince("8:00am"); setUntil("5:00pm")
-            }
 
             let schedule = {
                 type,
@@ -62,6 +57,16 @@ const FormSchedule = ({submit}) => {
             submit(schedule);
         }
     }
+
+    // se unsa como un component did mount para seteando los vaores al state solo en caso de que cambie el tipo de horario
+    useEffect(() => {
+        if (type === "medio") {
+            setSince("8:00am"); setUntil("12:00pm")
+        } 
+        if (type === "completo") {
+            setSince("8:00am"); setUntil("5:00pm")
+        }
+     }, [type])
     
     return ( 
         <>

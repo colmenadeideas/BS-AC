@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { validateFormAction, validationSuccess, validationError } from '../../store/actions/validateAction'
 
-const FormEmployee = ({submit}) => {
+const FormEmployee = ({submit, empToEdit}) => {
 
     //creacion de los states
-    const [image, setImage] = useState('')
-    const [name, setName] = useState('')
+    const [action, setAction] = useState('add')
+    const [id, setId] = useState('')
     const [ci, setCi] = useState('')
+    const [name, setName] = useState('')
+    const [image, setImage] = useState('')
     const [position, setPosition] = useState('')
 
     //state de redux
@@ -49,16 +51,30 @@ const FormEmployee = ({submit}) => {
         } else {
             //si todo sale bien
             validateSuccess();
+            
             let employee = {
                 image,
                 name,
                 ci, 
                 position
             }
-            submit(employee)
+
+            submit(action, employee, id)
         }
     }
-    
+
+    useEffect(() => {
+        console.log(empToEdit);
+        if (empToEdit !== '') {
+            setAction('edit')
+            setId(empToEdit.id)
+            setCi(empToEdit.ci)
+            setName(empToEdit.name)
+            setImage(empToEdit.image)
+            setPosition(empToEdit.position)
+        }
+    }, [empToEdit])
+
     return ( 
         <>
             <h2>Empecemos a agregar tus empleados</h2>
@@ -117,7 +133,7 @@ const FormEmployee = ({submit}) => {
                     ?   <div className="alert alert-danger m-2">Debe tener un minimo de 2 caracteres</div> 
                     :   ""
                 }
-                <button type="submit" className="btn btn-dark m-2">Agregar Empleado</button>
+                <button type="submit" className="btn btn-dark m-2"> {action === 'add' ? 'Agregar Empleado' : 'Editar Empleado' }</button>
             </form>
         </>
      );
