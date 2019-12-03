@@ -18,6 +18,7 @@ const Login = ({history}) => {
     const loginState = useSelector( state => state.login.login);
     const errorLogin = useSelector( state => state.login.error);
     const errorValidate = useSelector( state => state.validate.error);
+    const formName = useSelector( state => state.validate.form);
 
     const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ const Login = ({history}) => {
         const validateError = () => dispatch(validationError())
 
         //Inicia la validacion del formulario
-        validateForm();
+        validateForm("FormLogin");
 
         if(username.length < 4 || password.length < 4) {
             //en caso de error
@@ -57,7 +58,7 @@ const Login = ({history}) => {
                     <h2 className="text-center mb-5">Espacio de texto</h2>
                     <form className="login-form" onSubmit={handleSubmitLogin}>
                         {/* si hay error de validacion */}
-                        { errorValidate
+                        { errorValidate && formName === "FormLogin"
                             ?   <div className="alert alert-danger">Debe tener un minimo de 4 caracteres</div>
                             :   ""
                         }

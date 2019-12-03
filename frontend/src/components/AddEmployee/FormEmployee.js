@@ -66,23 +66,22 @@ const FormEmployee = ({submit}) => {
                 <div className="row justify-content-center">
                     <div className="col-2">
                         <div className="user__file">
-                            {
-                                image 
-                                    ?   <img className="user-img" src={image} alt=""/>
-                                    :   <>
-                                            <div className="user-icon">
-                                                <FontAwesomeIcon icon="user" />
-                                            </div>
-                                            <input 
-                                                type="file" 
-                                                className="input-image" 
-                                                id="fileImage" 
-                                                //value={image}
-                                                onChange={previewFile}
-                                                required
-                                            />
-                                            <label className="agregar" htmlFor="fileImage"><FontAwesomeIcon icon="plus" /></label>
-                                        </>
+                            {image 
+                                ?   <img className="user-img" src={image} alt=""/>
+                                :   <>
+                                        <div className="user-icon">
+                                            <FontAwesomeIcon icon="user" />
+                                        </div>
+                                        <input 
+                                            type="file" 
+                                            className="input-image" 
+                                            id="fileImage" 
+                                            //value={image}
+                                            onChange={previewFile}
+                                            required
+                                        />
+                                        <label className="agregar" htmlFor="fileImage"><FontAwesomeIcon icon="plus" /></label>
+                                    </>
                             }
                         </div>
                         <p>Texto simulado</p>
@@ -115,7 +114,7 @@ const FormEmployee = ({submit}) => {
                     </div>
                 </div>
                 { errorValidate && formName === "FormEmployee" 
-                    ?   <div className="alert alert-danger m-2">Debe tener un minimo de 6 caracteres</div> 
+                    ?   <div className="alert alert-danger m-2">Debe tener un minimo de 2 caracteres</div> 
                     :   ""
                 }
                 <button type="submit" className="btn btn-dark m-2">Agregar Empleado</button>

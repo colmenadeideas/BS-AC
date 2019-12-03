@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Swal from 'sweetalert2'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +11,10 @@ const FormSchedule = ({submit}) => {
     const [days, setDays] = useState([])
     const [since, setSince] = useState('')
     const [until, setUntil] = useState('')
+
+    //states de redux
+    const errorValidate = useSelector( state => state.validate.error);
+    const formName = useSelector( state => state.validate.form);
 
     const dispatch = useDispatch();
     //Acciones necesarias para la validacion
@@ -44,12 +47,10 @@ const FormSchedule = ({submit}) => {
             validateSuccess()
 
             if (type === "medio") {
-                setSince("8:00am")
-                setUntil("12:00pm")
+                setSince("8:00am"); setUntil("12:00pm")
             }
             if (type === "completo") {
-                setSince("8:00am")
-                setUntil("5:00pm")
+                setSince("8:00am"); setUntil("5:00pm")
             }
 
             let schedule = {
@@ -60,13 +61,10 @@ const FormSchedule = ({submit}) => {
             }
             submit(schedule);
         }
-
     }
-
     
     return ( 
         <>
-        {console.log(type)}
             <h2>Agregar el horario</h2>
             <form onSubmit={handleSubmit}>
                 {/* radio */}
@@ -133,11 +131,11 @@ const FormSchedule = ({submit}) => {
                                 <div className="form-row">
                                     <div className="col-3">
                                         <label className="sr-only" htmlFor="since">Desde</label>
-                                        <input type="text" className="user__input" id="since" placeholder="10:00am" onChange={e => setSince(e.target.value)}/>
+                                        <input type="text" className="user__input" id="since" placeholder="10:00am" onChange={e => setSince(e.target.value)} required/>
                                     </div>
                                     <div className="col-3">
                                         <label className="sr-only" htmlFor="until">Hasta</label>
-                                        <input type="text" className="user__input" id="until" placeholder="5:00pm" onChange={e => setUntil(e.target.value)}/>
+                                        <input type="text" className="user__input" id="until" placeholder="5:00pm" onChange={e => setUntil(e.target.value)} required/>
                                     </div>
                                 </div>
                             </>
@@ -146,7 +144,10 @@ const FormSchedule = ({submit}) => {
                     </div>
                 </div>
 
-                { since && until}
+                { errorValidate && formName 
+                    ? <div className="alert alert-danger m-2">Debe seleccionar al menos tres dias e indicar el tiempo</div>
+                    : ""
+                }
                 <button type="submit" className="btn btn-dark" >Agregar Horario</button>
             </form>
 

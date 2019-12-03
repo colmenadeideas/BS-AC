@@ -6,7 +6,7 @@ import FormEmployee from './FormEmployee'
 import FormSchedule from './FormSchedule'
 
 //Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
 
 const AddEmployee = ({history}) => {
@@ -78,6 +78,12 @@ const AddEmployee = ({history}) => {
                                 'Todos sus empleados tienen horario',
                                 'success'
                             )
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Agregado fallido',
+                                text: 'Intente de nuevo mas tarde!',
+                            })
                         }
                     }
                 })
@@ -89,21 +95,21 @@ const AddEmployee = ({history}) => {
                         'Continue con los demas empleados',
                         'success'
                     )
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Agregado fallido',
+                        text: 'Intente de nuevo mas tarde!',
+                    })
                 }
             }
-            if (res !== 1) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Agregado fallido',
-                    text: 'Intente de nuevo mas tarde!',
-                })
-            }
+
         })
     }
 
     return (  
         <React.Fragment>
-            <Navbar history={history}/>
+            <Navbar history={history} />
             <div>
                 <FormEmployee 
                     submit={submitEmployee}
