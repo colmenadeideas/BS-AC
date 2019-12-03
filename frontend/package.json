@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.7",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
     "react": "^16.11.0",
@@ -49,5 +50,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage" : "http://access.mtrxtest.com/"
+  "homepage": "http://access.mtrxtest.com/"
 }
