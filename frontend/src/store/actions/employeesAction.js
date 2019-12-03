@@ -10,6 +10,10 @@ import {
     ADD_SCHEDULE_REQUEST,
     ADD_SCHEDULE_SUCCESS,
     ADD_SCHEDULE_ERROR,
+
+    ADD_CARNET_REQUEST,
+    ADD_CARNET_SUCCESS,
+    ADD_CARNET_ERROR,
 }
 from '../constants'
 
@@ -112,4 +116,35 @@ export const addScheduleSuccess = (data) => ({
 })
 export const addScheduleError = () => ({
     type: ADD_SCHEDULE_ERROR
+})
+
+// funciones para agregar el carnet
+export function addCarnetAction(data) {
+    return (dispatch) => {
+        dispatch( addCarnetRequest() );
+
+        // Peticion de insercion a la API
+        axiosClient.post('/', data)
+            .then(response => {
+                console.log(response);
+                // Si se inserta correctamente el carnet
+                dispatch( addCarnetSuccess(data) );
+                return 1;
+            })
+            .catch(error => {
+                console.log(error);
+                // Si hay un error al insertarlo
+                dispatch( addCarnetError());
+            })
+    }
+}
+export const addCarnetRequest = () => ({
+    type: ADD_CARNET_REQUEST
+})
+export const addCarnetSuccess = (data) => ({
+    type: ADD_CARNET_SUCCESS,
+    payload: data
+})
+export const addCarnetError = () => ({
+    type: ADD_CARNET_ERROR
 })

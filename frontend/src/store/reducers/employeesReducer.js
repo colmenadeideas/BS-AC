@@ -10,14 +10,19 @@ import {
     ADD_SCHEDULE_REQUEST,
     ADD_SCHEDULE_SUCCESS,
     ADD_SCHEDULE_ERROR,
+
+    ADD_CARNET_REQUEST,
+    ADD_CARNET_SUCCESS,
+    ADD_CARNET_ERROR,
 } from '../constants'
 
 //state inicial para el modulo de empleados
 const initialState = {
     employees: [],
     employee: {},
+    carnet: {},
     schedule: {},
-    error: false,
+    error: false
 }
 
 export default function (state = initialState, action) {
@@ -70,6 +75,23 @@ export default function (state = initialState, action) {
                 schedule: action.payload,
             }
         case ADD_SCHEDULE_ERROR:
+            return {
+                ...state,
+                error: true,
+            }
+        
+        // casos para agregar el carnet
+        case ADD_CARNET_REQUEST:
+            return {
+                ...state,
+                error: false,
+            }
+        case ADD_CARNET_SUCCESS:
+            return {
+                ...state,
+                carnet: action.payload,
+            }
+        case ADD_CARNET_ERROR:
             return {
                 ...state,
                 error: true,
