@@ -64,8 +64,7 @@ const FormEmployee = ({submit, empToEdit}) => {
     }
 
     useEffect(() => {
-        console.log(empToEdit);
-        if (empToEdit !== '') {
+        if (empToEdit !== '' && empToEdit !== undefined) {
             setAction('edit')
             setId(empToEdit.id)
             setCi(empToEdit.ci)

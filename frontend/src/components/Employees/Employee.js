@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { addEmployeeAction, editEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
 
 //posteriormente el empToEdit vendra como prop al seleccionar el empleado a editar en otra pagina
-const Employee = ({history /*, empToEdit*/}) => { 
+const Employee = ({history /*, empToEdit, scheToEdit*/}) => { 
 
     const dispatch = useDispatch();
 
@@ -115,6 +115,7 @@ const Employee = ({history /*, empToEdit*/}) => {
     }
 
     const empToEdit = ''
+    const scheToEdit = ''
 
     return (  
         <React.Fragment>
@@ -126,6 +127,7 @@ const Employee = ({history /*, empToEdit*/}) => {
                 />
                 <FormSchedule 
                     submit={submitSchedule}
+                    scheToEdit={scheToEdit}
                 />
             </div>
         </React.Fragment>
