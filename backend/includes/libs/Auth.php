@@ -8,9 +8,9 @@
 		 * verifica si el usuario tiene sesion vencida
 		 */		
 		public static function handleLogin($controller) {
-			
+
 			$area = 'miweb';
-			
+
 			@session_start();
 			
 			if (isset($_SESSION['loggedIn']	)) {
@@ -20,14 +20,12 @@
 				
 				$role 	  = $_SESSION['role'];
 				$username = $_SESSION['username'];
-				
-				
+
 				//validar tipo de session y redirect if needed
 				$currentpage = Auth::getCurrentArea();
 				switch ($currentpage[0]) {
 			
 					case 'account':
-						
 						/*switch ($currentpage[1]) {
 							case 'firstlogin':		//it´s ok, go on						
 								break;
@@ -45,7 +43,6 @@
 						break;					
 					
 					/*case 'miweb':
-						
 						//check for valid role access
 						echo $controller;
 						//User::checkSession($controller); //check for session
@@ -57,34 +54,28 @@
 						 //check for valid role access
 						User::checkSession($controller); //check for session
 						break;
-				
 				}
-				
-				
-				
+
 			} else {
 			// If No sessions	
 			//Check if in Login Page
-			$currentpage = Auth::getCurrentPage();	
-			
-			
-			 switch ($currentpage[0]) {
-				
-				case 'account':
-					break;
-										
-				default:
-				
-					if (!isset($logged)) {
-						
-						header('location: '. URL);			
-						
-					}
-					break;
-					
+                $currentpage = Auth::getCurrentPage();	
+                
+                switch ($currentpage[0]) {
+                    
+                    case 'account':
+                        break;
+                                            
+                    default:
+                    
+                        if (!isset($logged)) {
+                            
+                            header('location: '. URL);			
+                            
+                        }
+                        break;
+                }
 			}
-			}
-			
 		
 		}
 		

@@ -22,6 +22,7 @@ import {
 from '../constants'
 
 import axiosClient from '../../helpers/axios';
+import Swal from 'sweetalert2'
 
 //funciones para traer a todos los empleados de base de datos
 export function getEmployeesAction() {
@@ -66,17 +67,34 @@ export function addEmployeeAction(data) {
         dispatch( addEmployeeRequest() );
 
         // Peticion de insercion a la API
-        axiosClient.post('/', data)
+        axiosClient.post('api/employees/insert/employees', data)
             .then(response => {
                 console.log(response);
                 // Si se inserta correctamente el empleado
-                dispatch( addEmployeeSuccess(data) );
-                return 1;
+                dispatch( addEmployeeSuccess(data));
+                if (response.data === 1) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Agregado exitoso',
+                        text: 'Hay un nuevo empleado!',
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Intente de nuevo!',
+                    })
+                }
             })
             .catch(error => {
                 console.log(error);
                 // Si hay un error al insertarlo
                 dispatch( addEmployeeError());
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Agregado fallido',
+                    text: 'Intente de nuevo mas tarde!',
+                })
             })
     }
 }
@@ -129,7 +147,8 @@ export function addScheduleAction(data) {
         dispatch( addScheduleRequest() );
 
         // Peticion de insercion a la API
-        axiosClient.post('/', data)
+        console.log(data);
+        axiosClient.post('api/employees/insert/schedules', data)
             .then(response => {
                 console.log(response);
                 // Si se inserta correctamente el empleado

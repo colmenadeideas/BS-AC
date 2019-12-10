@@ -1,4 +1,4 @@
-import React /*, { useEffect }*/ from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import './Employees.css'
 import Navbar from '../Navbar/Navbar'
@@ -6,18 +6,21 @@ import FormEmployee from './FormEmployee'
 import FormSchedule from './FormSchedule'
 
 //Redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addEmployeeAction, editEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
 
 //posteriormente el empToEdit vendra como prop al seleccionar el empleado a editar en otra pagina
 const Employee = ({history /*, empToEdit, scheToEdit*/}) => { 
 
+    //states de redux
+    const empUsed = useSelector( state => state.employees.employee);
+    console.log(empUsed);
+    //metodos de redux necesarios
     const dispatch = useDispatch();
 
     const addEmp = data => dispatch(addEmployeeAction(data))
     const editEmp = (id, data) => dispatch(editEmployeeAction(id, data))
-
-    const addSche = data => dispatch(addScheduleAction(data))
+    const addSche = (data, emp) => dispatch(addScheduleAction(data, emp))
 
     //variable para evaluar la respuesta de la API
     let res = -1
@@ -27,26 +30,13 @@ const Employee = ({history /*, empToEdit, scheToEdit*/}) => {
 
         if (action === 'add') {
             res = addEmp(data)
-    
-            if (res === 1) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Agregado exitoso',
-                    text: 'Hay un nuevo empleado!',
-                })
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Agregado fallido',
-                    text: 'Intente de nuevo mas tarde!',
-                })
-            }
+            console.log(res);
         } else {
             editEmp(id, data)
         }
     }
 
-    const submitSchedule = data => {
+    const submitSchedule = (action, data, id) => {
         console.log(data)
 
         let timerInterval
@@ -79,6 +69,7 @@ const Employee = ({history /*, empToEdit, scheToEdit*/}) => {
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
                         res = addSche(data);
+                        console.log(res);
                         if (res === 1) {
                             Swal.fire(
                                 'Enhorabuena!',

@@ -142,7 +142,7 @@ const FormSchedule = ({submit, scheToEdit}) => {
                             <input className="form-check-input" type="radio" name="typeSchedule" id="type1" value="medio" checked={typeCheck.type1} onChange={changeType}/>
                             <label className="form-check-label" htmlFor="type1">
                                 Medio
-                            </label>
+                            </label> 
                         </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" name="typeSchedule" id="type2" value="completo" checked={typeCheck.type2} onChange={changeType}/>

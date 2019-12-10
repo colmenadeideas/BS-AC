@@ -10,9 +10,9 @@ const FormEmployee = ({submit, empToEdit}) => {
     //creacion de los states
     const [action, setAction] = useState('add')
     const [id, setId] = useState('')
-    const [ci, setCi] = useState('')
+    const [identificacion_pais, setCi] = useState('')
     const [name, setName] = useState('')
-    const [image, setImage] = useState('')
+    const [photo, setPhoto] = useState('')
     const [position, setPosition] = useState('')
 
     //state de redux
@@ -33,7 +33,7 @@ const FormEmployee = ({submit, empToEdit}) => {
             //console.log(reader)
         }
         reader.onloadend = function () {
-          setImage(reader.result)
+          setPhoto(reader.result)
         }
     }
 
@@ -45,7 +45,7 @@ const FormEmployee = ({submit, empToEdit}) => {
         validateForm("FormEmployee")
 
         //modificar posteriormente las validaciones a como seran finalmente
-        if(name.length < 2 || ci.length < 2) {
+        if(name.length < 2 || identificacion_pais.length < 2) {
             //en caso de error
             validateError();
         } else {
@@ -53,9 +53,9 @@ const FormEmployee = ({submit, empToEdit}) => {
             validateSuccess();
             
             let employee = {
-                image,
+                photo,
                 name,
-                ci, 
+                identificacion_pais, 
                 position
             }
 
@@ -69,7 +69,7 @@ const FormEmployee = ({submit, empToEdit}) => {
             setId(empToEdit.id)
             setCi(empToEdit.ci)
             setName(empToEdit.name)
-            setImage(empToEdit.image)
+            setPhoto(empToEdit.photo)
             setPosition(empToEdit.position)
         }
     }, [empToEdit])
@@ -81,8 +81,8 @@ const FormEmployee = ({submit, empToEdit}) => {
                 <div className="row justify-content-center">
                     <div className="col-2">
                         <div className="user__file">
-                            {image 
-                                ?   <img className="user-img" src={image} alt=""/>
+                            {photo 
+                                ?   <img className="user-img" src={photo} alt=""/>
                                 :   <>
                                         <div className="user-icon">
                                             <FontAwesomeIcon icon="user" />
@@ -113,7 +113,7 @@ const FormEmployee = ({submit, empToEdit}) => {
                         <input 
                             type="text" 
                             className="user__input"
-                            value={ci}
+                            value={identificacion_pais}
                             onChange={e => setCi(e.target.value)}
                             placeholder="Cedula" 
                             required

@@ -14,12 +14,10 @@
 		public function init(){
             //sets the $_url
 
-        
 			$this->_getUrl();
 			
 			@$this->_loadController($this->_url[0]);
 			$this->_getControllerMethod();
-			
 		}
 						
 		private function _getUrl() { 
@@ -28,15 +26,13 @@
 			$url = rtrim($url, '/');
 			$url = filter_var( $url, FILTER_SANITIZE_URL );
 			
-			$this->_url = explode('/', $url);
-									
+			$this->_url = explode('/', $url);					
 		}
 		
 		private function _loadDefaultController() {
 	
 			require_once($this->_controllerPath . $this->_defaultFile . '.php');
 			$this->_controller = new $this->_defaultFile;
-		
 		}
 		
 		

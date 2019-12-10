@@ -36,13 +36,18 @@
 					return DB::query("SELECT * FROM " . DB_PREFIX . "$what ");
 				} else {
 					// Get By A Parameter
-					return DB::query("SELECT * FROM " . DB_PREFIX . "$what WHERE $param=%i $limit", $id);				
+					return DB::query("SELECT * FROM " . DB_PREFIX . "$what WHERE $param=%s $limit", $id);				
 				}
 			//}
+        }
+        
+        public function getId($what) {
+            return DB::query("SELECT MAX(id) AS id FROM " .$what);
+        }
 
-
-		}
-
+        public function updateAll($what, $param, $value) {
+            return DB::query("UPDATE $what SET $param=$value");
+        }
 
 	}
 ?>

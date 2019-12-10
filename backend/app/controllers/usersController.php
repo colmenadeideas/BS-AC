@@ -11,7 +11,6 @@
 		
 		//CREATE: MEthod called by Control Panel form, or ACCOUNTCONTROLLER to generate user after verification
 		public function create($data){
-				
 			//User
 			$array_user['username'] = escape_value($data['username']);
 			$array_user['role'] = escape_value($data['role']);
@@ -51,9 +50,7 @@
 						$send_mail = 'N';
 					}
 				}			
-				
-				
-				
+
 				if ($send_mail === 'Y') {
 					if(isset($data_data['facebook_id']) || isset($data_data['google_id'])) {	// has facebook or google registration	
 							// Welcome Email only
@@ -88,7 +85,6 @@
 			return DB::affectedRows();
 					
 		}
-
 
 		// CREATE_PROFILE: Method called by ACCOUNTCONTROLLER or USERS to generate User Profile in Database separate table
 		public function create_profile($table,$id, $data) {

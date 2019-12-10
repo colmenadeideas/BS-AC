@@ -24,7 +24,6 @@
 		
 		// SIGNIN: verifies if User already logged in, if not shows login screen
 		public function signin() {
-			
              $already_loggedin = User::get('role');
              echo $already_loggedin;
 			
@@ -172,11 +171,9 @@
 		
 		// IDENTIFY: verifies which session corresponds to user, and redirects them to appropiate area
 		public function identify () {
-				
 			User::checkSession();
 			//Auth::handleLogin('account');
 			User::gotoMainArea();			
-			
 		}
 		
 		// LOGOUT: kills session and redirects user to home
@@ -185,9 +182,7 @@
 			$this->user->destroy();
 			header('location: '. URL);	
 		} 
-		
-		
-		
+
 		/*
 		 * USER CREATION
 		 */
@@ -259,11 +254,9 @@
 				$field_data = escape_value($value);				
 				$array_data[$field] = $field_data;
 			}
-			
-			
+
 			unset($array_data['recaptcha_challenge_field']);
 			unset($array_data['recaptcha_response_field']);			
-			
 			
 			// 1 -Creates User&Profile and Sends Authentication Link
 			$array_user['username'] 	= $array_data['email'];
@@ -320,14 +313,11 @@
 				//Google data
 				$array_user['data']['google_id'] = $array_data['id'];
 				$array_user['data']['locale'] = $array_data['locale'];	
-								
-			
 			}
 					
 			$array_user['data']['creationdate'] = date("Y-m-d h:i:s");
 			
 			$array_user['data'] = json_encode($array_user['data']);
-			
 			
 			//Check if already exist in User database
 			$already_registered =	$this->model->getAccount("",$array_data['email'], 'username');
@@ -356,14 +346,11 @@
 				echo REGISTRATION_MESSAGE_SUCCESS;		
 			} else {
 				echo REGISTRATION_MESSAGE_ERROR;
-			}
-			
-			
+            }
+
 		}
-		
-		
-		
-		
+
+
 		/*
 		 * SETTINGS methods
 		 */
@@ -383,17 +370,16 @@
 				$this->edit('password', $old_password);
 			}			
 			
-			
 		}
 		// PROFILE: shows main Account area
 		public function profile () {
 			$this->edit('profile');
 
 		}
-		
+
 		// RECOVER: Method called by form, checks user and triggers recovery by email password process
 		function recover($what='password'){
-			
+
 			$post = json_decode(file_get_contents('php://input'), true); //asi es como se extraen los datos que vienen por post de react
 			$username = escape_value($post['email']);
 			//Check for username in Database
@@ -420,15 +406,14 @@
 				echo PASSWORD_RECOVERY_SUCCESS_RESPONSE;
 			}
 		}
-		
+
 		// EDIT: Views to edit Password or Profile
 		public function edit ($what, $old_password = ''){
 			
 			$this->view->userdata = $this->user->getUserdata();
+			$this->view->page = "";
 				
 			Auth::handleLogin('account');
-			
-			$this->view->page = "";
 
 			switch ($what) {
 				case 'password':
@@ -448,8 +433,8 @@
 		
 					//Page
 					$this->view->buildpage('settings/profile','settings');
-				
-					break;	
+                    break;
+
 				case 'notifications':
 
 					//$this->view->title = "Configuración | Mi perfil";
@@ -458,18 +443,15 @@
 					//$this->view->userdata = $this->user->getUserdata($role, $username);
 					//Page
 					$this->view->buildpage('settings/notifications','settings');
+                    break;
 
-					break;
 				case 'preferences':					
 					$this->view->buildpage('settings/preferences','settings');
 					break;
-				
 			}			
 			
 		}
 		
-
-
 		/*
 	 	* function register() {			
 			
@@ -486,8 +468,6 @@
 				//Redirect		
 				$this->identify();
 			}
-			
-			
 		}*/
 		
 		public function update($what) {
@@ -529,7 +509,7 @@
 						//$encoded_image					=	base64_encode($image_data);
 						$array_user['avatar'] 			= $encoded_image;
 						
-						$role 								= $array_datos['role']; 
+						$role 							= $array_datos['role']; 
 						
 						$array_fb['data']['birthday'] 		=	$array_datos['birthday'];
 						$array_fb['data']['lastupdatedata']	= date("Y-m-d h:i:s");
@@ -569,7 +549,6 @@
 					} else {
 						echo "false"; /// Maybe they were the same, nothing changed.
 					}
-					
 					break;
 					
 				case 'password':
@@ -617,9 +596,7 @@
 									eval($data);
 							
 									$array_datos[$campo] = $valor;
-								
 								}
-										
 							}
 											
 						}
@@ -659,19 +636,12 @@
 								$this->view->redirect_link = URL .'account/identify';
 								$this->view->response = SYSTEM_PASSWORD_CHANGE;
 								$this->view->render('redirect');						
-								
 							} 
 						}
-						
-						
-						
+
 					}
-					
 					break;
 			}			
-				
-				
-				
 		
 		}	
 	}

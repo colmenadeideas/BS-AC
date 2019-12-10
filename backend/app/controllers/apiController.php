@@ -2,13 +2,36 @@
 	class apiController extends Controller {
 		public function __construct() {
 	
-			parent::__construct();
+            parent::__construct();
+            header('Access-Control-Allow-Origin: http://localhost:3000');
+            header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 		}
 		//ACCESS/ 
-			//create //log in or out with time
-			//read  //list
-			//update //add comments
-			//delete //delete entry
+        //create //log in or out with time
+        //read  //list
+        //update //add comments
+        //delete //delete entry
+
+        public function employees($action, $table) {
+            switch ($action) {
+                case 'insert':
+                    $post = json_decode(file_get_contents('php://input'), true); //asi es como se extraen los datos que vienen por post de react
+                    $days = json_encode($post['days']);
+                    $post['days'] = $days;
+                    if ($table === 'schedules') {
+                        $this->api->queries($action, $table, $post);
+                        $resId = $this->api->getId($table);
+                        $resEmp = $this->api->updateAll('employees', 'id_schedule', $resId);
+                    } else {
+                        $this->api->queries($action, $table, $post);
+                    }
+                    break;
+                
+                default:
+                    echo 'hola';
+                    break;
+            }
+        }
 		
 		public function fixtime() {
 			//This is to fix server diference time witth +4.5 GMT
@@ -32,10 +55,12 @@
 			$timeAll['a']	= $timepart2[1];
 
 			return $timeAll;
-		}
+        }
+
 		public function hola(){
 			echo "hola mundo";
-		}
+        }
+
 		public function users ($action, $param1="",  $param2="") {
 			switch ($action) {
 				case 'list':
@@ -178,9 +203,7 @@
 								
 								break;
 					}
-						
-					
-					
+
 					/*//Log IN
 					if(empty($hasAlreadyLogged)) {
 					
@@ -244,13 +267,7 @@
 					
 					echo json_encode($response, JSON_UNESCAPED_UNICODE);
 					break;
-					
-					
-				/**********
-				 * ********	READ
-				 * ********
-				 */	
-					
+
 				////------- READ	
 				case 'get': 
 				

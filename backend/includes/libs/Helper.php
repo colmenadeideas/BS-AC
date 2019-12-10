@@ -3,7 +3,8 @@
 	class Helper {
 	
 		function __construct() {			
-		
+            // header('Access-Control-Allow-Origin: http://localhost:3000');
+            // header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 		}
 		
 		static function getIpAddress($ip = USER_IP) {
@@ -17,13 +18,12 @@
 				} else {
 					$ip = $_SERVER['REMOTE_ADDR'];
 				}
-				
 			}
 			return $ip;
 		}
 		
 		
-		//Database	Basic Usage
+		//Database Basic Usage
 		static function insert($tablename, $vars){
 			
 			$tablename = escape_value($tablename);
