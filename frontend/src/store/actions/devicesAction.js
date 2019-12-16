@@ -21,11 +21,11 @@ export function getDevicesAction(data) {
         dispatch( getDevicesRequest() );
 
         // Peticion a la API
-        axiosClient.get('/')
+        axiosClient.get('api/devices/get/devices')
             .then(response => {
                 console.log(response);
                 // Si trae la informacion correctamente
-                dispatch( getDevicesSuccess(data) );
+                dispatch( getDevicesSuccess(response.data) );
             })
             .catch(error => {
                 console.log(error);

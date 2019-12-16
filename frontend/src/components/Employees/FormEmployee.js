@@ -27,6 +27,7 @@ const FormEmployee = ({submit, empToEdit}) => {
 
     const previewFile = () => {
         var file    = document.querySelector('input[type=file]').files[0];
+        console.log(file);
         var reader  = new FileReader();
         if (file) {
             reader.readAsDataURL(file);
@@ -62,12 +63,12 @@ const FormEmployee = ({submit, empToEdit}) => {
             submit(action, employee, id)
         }
     }
-
+    
     useEffect(() => {
-        if (empToEdit !== '' && empToEdit !== undefined) {
+        if (empToEdit !== '') {
             setAction('edit')
             setId(empToEdit.id)
-            setCi(empToEdit.ci)
+            setCi(empToEdit.identificacion_pais)
             setName(empToEdit.name)
             setPhoto(empToEdit.photo)
             setPosition(empToEdit.position)

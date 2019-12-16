@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Navbar from '../Navbar/Navbar';
 import UserOrDevice from './UserOrDevice';
+import ListEmployees from './ListEmployees'
 
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +17,10 @@ const Dashboard = ({history}) => {
     const employees = useSelector( state => state.employees.employees);
     const devices = useSelector( state => state.devices.devices);
 
-    console.log(employees);
+    const countEmployees = employees.length
+    const countDevices = devices.length
+
+    //console.log(devices);
     const dispatch = useDispatch();
 
     // consulta a la API los empleados y dispositivos (simula un componentDidMount)
@@ -24,6 +28,7 @@ const Dashboard = ({history}) => {
         dispatch( getEmployeesAction())
         dispatch( getDevicesAction() )
     }, [dispatch])
+
 
     return ( 
         <React.Fragment>
@@ -49,53 +54,7 @@ const Dashboard = ({history}) => {
                 {/* division en tres columnas */}
                 {/* columna 1 */}
                 <div className="col-md-3">
-                    
-                    <ul className="list-group mb-2">
-                        <li className="list-group-item list-group-item-dark">
-                            Lista de Empleados
-                        </li>
-                        <li className="list-group-item list-group-item-action">
-                            <div className="row">
-                                <div className="col-md-9">
-                                    Dapibus facilisis
-                                </div>
-                                <div className="col-md-3">
-                                    <button type="button" className="btn btn-sm"><FontAwesomeIcon icon="bars"/></button>
-                                </div>
-                            </div>
-                        </li>
-                        <li className="list-group-item list-group-item-action">
-                            <div className="row">
-                                <div className="col-md-9">
-                                    Morbi leo
-                                </div>
-                                <div className="col-md-3">
-                                    <button type="button" className="btn btn-sm"><FontAwesomeIcon icon="bars"/></button> 
-                                </div>
-                            </div>
-                        </li>
-                        <li className="list-group-item list-group-item-action">
-                            <div className="row">
-                                <div className="col-md-9">
-                                    Porta consectetur
-                                </div>
-                                <div className="col-md-3">
-                                    <button type="button" className="btn btn-sm"><FontAwesomeIcon icon="bars"/></button> 
-                                </div>
-                            </div>
-                        </li>
-                        <li className="list-group-item list-group-item-action">
-                            <div className="row">
-                                <div className="col-md-9">
-                                    Vestibulum eros
-                                </div>
-                                <div className="col-md-3">
-                                    <button type="button" className="btn btn-sm"><FontAwesomeIcon icon="bars"/></button> 
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <small>Direccion IP: 123.123.123.123</small>
+                    <ListEmployees employees={employees} history={history}/>
                 </div>
                 {/* fin columna 1 */}
 
@@ -141,7 +100,7 @@ const Dashboard = ({history}) => {
                 </div>
                 {/* columna 3 */}
             </div>
-            { (employees.length <= 0 || devices.length <= 0) && <UserOrDevice employees={employees.length} devices={devices} /> }
+            { (countEmployees <= 0 || countDevices <= 0) && <UserOrDevice employees={countEmployees} devices={countDevices} /> }
 
         </React.Fragment>
      );

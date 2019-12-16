@@ -1,4 +1,4 @@
-import React/*, { useState } */from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2'
 import './Employees.css'
 import Navbar from '../Navbar/Navbar'
@@ -10,11 +10,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addEmployeeAction, editEmployeeAction, addScheduleAction } from '../../store/actions/employeesAction'
 
 //posteriormente el empToEdit vendra como prop al seleccionar el empleado a editar en otra pagina
-const Employee = ({history /*, empToEdit, scheToEdit*/}) => { 
+const Employee = (props, {history}) => { 
+
+    //states
+    const [empToEdit, setEmpToEdit] = useState('')
+    const [scheToEdit, setScheToEdit] = useState('')
 
     //states de redux
     const empUsed = useSelector( state => state.employees.employee);
-    console.log(empUsed);
+    //console.log(empUsed);
     //metodos de redux necesarios
     const dispatch = useDispatch();
 
@@ -81,8 +85,27 @@ const Employee = ({history /*, empToEdit, scheToEdit*/}) => {
         })
     }
 
-    const empToEdit = ''
-    const scheToEdit = ''
+    const checkUndefined = (value) => {
+        if (typeof(props.location.state ) !== 'undefined') {
+            return value;
+        } else {
+            return -1;
+        }
+    }
+
+    useEffect(() => {
+        let checkState = checkUndefined(props.location.state);
+        if (checkState !== -1) {
+            let checkEmp = checkUndefined(props.location.state.empToEdit);
+            let checkSche = checkUndefined(props.location.state.scheToEdit);
+            if (checkEmp !== 1) {
+                setEmpToEdit(props.location.state.empToEdit); 
+            }
+            if (checkSche!== -1) {
+                setScheToEdit(props.location.state.scheToEdit);
+            }
+        }
+    }, [])
 
     return (  
         <React.Fragment>

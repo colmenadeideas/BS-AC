@@ -49,6 +49,17 @@
                     break;
             }
         }
+        public function devices($action, $table) {
+            switch ($action) {
+                case 'get':
+                    $this->api->queries($action, $table);
+                    break;
+
+                default: 
+                    echo 'devices';
+                    break;
+            }
+        }
 		
 		public function fixtime() {
 			//This is to fix server diference time witth +4.5 GMT

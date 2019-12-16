@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import Navbar from '../Navbar/Navbar'
 import html2canvas from 'html2canvas';
+import QRCode from 'qrcode.react';
 
 //Redux
 import { useDispatch } from 'react-redux';
@@ -11,18 +12,20 @@ const CarnetPreview = () => {
 
     //creacion de los states
     const [color, setColor] = useState('')
+    const [date_creation, setDate_creation] = useState('')
+    const [date_expiration, setDate_expiration] = useState('')
     const [carnet, setCarnet] = useState(false)
 
     const dispatch = useDispatch();
     const addCarnet = data => dispatch(addCarnetAction(data))
-    
+
     //variable para evaluar la respuesta de la API
     let res = -1
 
     const actualizarCarnet = e => {
         e.preventDefault()
-        res = addCarnet(color)
 
+        res = addCarnet(color)
         if (res === 1) {
             Swal.fire({
                 icon: 'success',
@@ -61,6 +64,16 @@ const CarnetPreview = () => {
         console.log("enviar carnet");
     }
 
+    useEffect(() => {
+        let today = new Date();
+        let yearExp = today.getFullYear()+10
+        let dateCre = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let dateExp = yearExp+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+        setDate_creation(dateCre)
+        setDate_expiration(dateExp)
+    }, [date_creation, date_expiration])
+
     return ( 
         <>
             <Navbar />
@@ -69,7 +82,16 @@ const CarnetPreview = () => {
             <div className="row">
                 <div className="col-4 d-flex flex-column align-items-center">
                     Vista previa del carnet
-                    <div id="carnet" className="w-75 border mt-2" style={{height: "400px", background: color}}></div>
+                    <div id="carnet" className="w-75 border mt-2" style={{height: "400px", background: color}}>
+                        <QRCode
+                            id="123456"
+                            value="123456"
+                            size={250}
+                            level={"H"}
+                            bgColor={"transparent"}
+                            includeMargin={true}
+                        />
+                    </div>
                     <form className="d-flex flex-column align-items-center" onSubmit={actualizarCarnet}>
                         <input className="my-3" type="color" name="color" id="color" onChange={ e => setColor(e.target.value) } />
                         <button className="btn btn-dark btn-block redondeado">Actualizar Carnet</button>
