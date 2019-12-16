@@ -53,7 +53,7 @@ const Navbar = ({history}) => {
                             <Link className="nav-link" to="/devices">Dispositivos</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Link</Link>
+                            <Link className="nav-link" to="/employee">Empleado</Link>
                         </li>
                         <li className="nav-item">
                             <button className="nav-link button-a" onClick={handleLogout}>Cerrar Sesion</button>

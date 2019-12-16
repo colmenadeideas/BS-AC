@@ -28,7 +28,7 @@
 			
 			$tablename = escape_value($tablename);
 			
-			$query = DB::insert( DB_PREFIX . $tablename, $vars);
+            $query = DB::insert( DB_PREFIX . $tablename, $vars);
 			return DB::affectedRows();
 		}
 		

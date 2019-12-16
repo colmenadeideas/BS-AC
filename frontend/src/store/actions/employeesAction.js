@@ -30,7 +30,7 @@ export function getEmployeesAction() {
         dispatch( getEmployeesRequest() );
 
         // Peticion de insercion a la API
-        axiosClient.get('/')
+        axiosClient.get('api/employees/get/employees')
             .then(response => {
                 console.log(response);
                 //si la peticion se realiza correctamente
@@ -71,19 +71,32 @@ export function addEmployeeAction(data) {
             .then(response => {
                 console.log(response);
                 // Si se inserta correctamente el empleado
-                dispatch( addEmployeeSuccess(data));
-                if (response.data === 1) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Agregado exitoso',
-                        text: 'Hay un nuevo empleado!',
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Intente de nuevo!',
-                    })
+                switch (response.data) {
+                    case 1:
+                        dispatch( addEmployeeSuccess(data));
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Agregado exitoso',
+                            text: 'Hay un nuevo empleado!',
+                        })
+                        break;
+                
+                    case -1:
+                        dispatch( addEmployeeError());
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oh oh!',
+                            text: 'Ya existe un registro con esa identificacion',
+                        })
+                        break;
+                    default:
+                        dispatch( addEmployeeError());
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Intente de nuevo!',
+                        })
+                        break;
                 }
             })
             .catch(error => {
@@ -142,23 +155,49 @@ export const editEmployeeError = () => ({
 })
 
 // funciones para agregar el horario de un empleado
-export function addScheduleAction(data) {
+export function addScheduleAction(data, param) {
     return (dispatch) => {
         dispatch( addScheduleRequest() );
 
         // Peticion de insercion a la API
         console.log(data);
-        axiosClient.post('api/employees/insert/schedules', data)
+
+        axiosClient.post('api/employees/insert/schedules/'+param, data)
             .then(response => {
                 console.log(response);
                 // Si se inserta correctamente el empleado
-                dispatch( addScheduleSuccess(data) );
-                return 1;
+                dispatch( addScheduleSuccess(data));
+                if (response.data === 11) {
+                    if (param === 'all') {
+                        Swal.fire(
+                            'Enhorabuena!',
+                            'Todos sus empleados tienen horario',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire(
+                            'Agregado con Exito!',
+                            'Continue con los demas empleados',
+                            'success'
+                        )
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Agregado fallido',
+                        text: 'Intente de nuevo mas tarde!',
+                    })
+                }
             })
             .catch(error => {
                 console.log(error);
                 // Si hay un error al insertarlo
                 dispatch( addScheduleError());
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Agregado fallido',
+                    text: 'Intente de nuevo mas tarde!',
+                })
             })
     }
 }

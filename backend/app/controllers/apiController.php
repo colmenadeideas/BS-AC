@@ -12,23 +12,40 @@
         //update //add comments
         //delete //delete entry
 
-        public function employees($action, $table) {
+        public function employees($action, $table, $param='') {
             switch ($action) {
+                case 'get':
+                    $this->api->queries($action, $table);
+                    break;
+
                 case 'insert':
                     $post = json_decode(file_get_contents('php://input'), true); //asi es como se extraen los datos que vienen por post de react
-                    $days = json_encode($post['days']);
-                    $post['days'] = $days;
                     if ($table === 'schedules') {
+                        $days = json_encode($post['days']);
+                        $post['days'] = $days;
+
                         $this->api->queries($action, $table, $post);
-                        $resId = $this->api->getId($table);
-                        $resEmp = $this->api->updateAll('employees', 'id_schedule', $resId);
+                        $resIdSche = $this->api->queries('getLastId', $table);
+
+                        if ($param === 'all') {
+                            $this->api->updateAll('employees', 'id_schedule', $resIdSche);
+                        } else {
+                            $data['id_schedule'] = $resIdSche;
+                            $resIdEmp = $this->api->queries('getLastId', 'employees'); 
+                            $this->api->queries('update', 'employees', $data, $resIdEmp);
+                        }
                     } else {
-                        $this->api->queries($action, $table, $post);
+                        $resExist = $this->api->queries('checkExist', $table, 'identificacion_pais', $post['identificacion_pais']);
+                        if ($resExist === 1) {
+                            $this->api->queries($action, $table, $post);
+                        } else {
+                            echo $resExist;
+                        }
                     }
                     break;
                 
                 default:
-                    echo 'hola';
+                    echo 'default';
                     break;
             }
         }

@@ -41,7 +41,7 @@
 			//}
         }
         
-        public function getId($what) {
+        public function getLastId($what) {
             return DB::query("SELECT MAX(id) AS id FROM " .$what);
         }
 

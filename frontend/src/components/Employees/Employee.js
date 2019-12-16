@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React/*, { useState } */from 'react';
 import Swal from 'sweetalert2'
 import './Employees.css'
 import Navbar from '../Navbar/Navbar'
@@ -20,7 +20,7 @@ const Employee = ({history /*, empToEdit, scheToEdit*/}) => {
 
     const addEmp = data => dispatch(addEmployeeAction(data))
     const editEmp = (id, data) => dispatch(editEmployeeAction(id, data))
-    const addSche = (data, emp) => dispatch(addScheduleAction(data, emp))
+    const addSche = (data, param) => dispatch(addScheduleAction(data, param))
 
     //variable para evaluar la respuesta de la API
     let res = -1
@@ -60,46 +60,22 @@ const Employee = ({history /*, empToEdit, scheToEdit*/}) => {
                         Swal.showLoading()
                         timerInterval = setInterval(() => {
                         Swal.getContent().querySelector('b')
-                            .textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    onClose: () => {
-                        clearInterval(timerInterval)
+                        .textContent = Swal.getTimerLeft()
+                    }, 100)
+                },
+                onClose: () => {
+                    clearInterval(timerInterval)
                     }
                 }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        res = addSche(data);
-                        console.log(res);
-                        if (res === 1) {
-                            Swal.fire(
-                                'Enhorabuena!',
-                                'Todos sus empleados tienen horario',
-                                'success'
-                            )
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Agregado fallido',
-                                text: 'Intente de nuevo mas tarde!',
-                            })
-                        }
+                    if (result.dismiss === Swal.DismissReason.timer ) {
+                        addSche(data, 'all')
+                        console.log('all');
                     }
                 })
-            } else {
-                res = addSche(data);
-                if (res === 1) {
-                    Swal.fire(
-                        'Agregado con Exito!',
-                        'Continue con los demas empleados',
-                        'success'
-                    )
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Agregado fallido',
-                        text: 'Intente de nuevo mas tarde!',
-                    })
-                }
+            }
+            if (result.dismiss === Swal.DismissReason.cancel) {
+                addSche(data, 'only');
+                console.log('only');
             }
 
         })

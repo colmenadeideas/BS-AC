@@ -16,14 +16,12 @@ const Dashboard = ({history}) => {
     const employees = useSelector( state => state.employees.employees);
     const devices = useSelector( state => state.devices.devices);
 
-    console.log(devices);
+    console.log(employees);
     const dispatch = useDispatch();
-
-    const handleShow = () => true;
 
     // consulta a la API los empleados y dispositivos (simula un componentDidMount)
     useEffect(() => {
-        dispatch( getEmployeesAction() )
+        dispatch( getEmployeesAction())
         dispatch( getDevicesAction() )
     }, [dispatch])
 
@@ -143,8 +141,8 @@ const Dashboard = ({history}) => {
                 </div>
                 {/* columna 3 */}
             </div>
-            { (employees.length === 0 || devices.length === 0) && <UserOrDevice modalShow={handleShow} employees={employees} devices={devices} /> }
-            
+            { (employees.length <= 0 || devices.length <= 0) && <UserOrDevice employees={employees.length} devices={devices} /> }
+
         </React.Fragment>
      );
 }

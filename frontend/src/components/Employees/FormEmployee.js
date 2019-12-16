@@ -53,10 +53,10 @@ const FormEmployee = ({submit, empToEdit}) => {
             validateSuccess();
             
             let employee = {
-                photo,
-                name,
                 identificacion_pais, 
-                position
+                name,
+                photo,
+                position,
             }
 
             submit(action, employee, id)

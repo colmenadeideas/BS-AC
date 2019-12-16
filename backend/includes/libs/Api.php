@@ -4,12 +4,17 @@ class Api extends ApiQuery {
 	public function __construct() {
         parent::__construct();
         header('Access-Control-Allow-Origin: http://localhost:3000');
-        // header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+        header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     }
     
     public function queries($action, $table, $data='', $id='', $by='id') {
-        
         switch ($action) {
+            //basicos
+            case 'get':
+                $response = ApiQuery::get($table);
+                echo json_encode($response);
+            break;
+
             case 'insert':
                 $response = Helper::insert($table, $data);
                 echo $response;
@@ -18,20 +23,29 @@ class Api extends ApiQuery {
             case 'update':
                 $response = Helper::update($table, $id, $data, $by);
                 echo $response;
-                break;
-            
-            case 'get':
-                $response = ApiQuery::get($table);
-                echo json_encode($response);
+            break;
+
+
+            //especiales
+            case 'getLastId':
+                $response = ApiQuery::getLastId($table);
+                return $response[0]['id'];
+            break;
+
+            case 'checkExist':
+                $response = ApiQuery::get($table, $data, $id);
+                if (is_array($response) && sizeof($response) <= 0) {
+                    return 1;
+                } else {
+                    return -1;
+                }
                 break;
         }
     }
-    public function getId($table) {
-        $response = ApiQuery::getId($table);
-        return $response[0]['id'];
-    }
+
     public function updateAll($table, $param, $value) {
-        $response = ApiQuery::updateAll($table, $by, $value);
+        $response = ApiQuery::updateAll($table, $param, $value);
+        echo 1;
     }
 
 	// AUTOCOMPLETE: This function is invoked when user is writing fields related to : Doctor's name, Clinics, Addresses and Doctor's Speciality
