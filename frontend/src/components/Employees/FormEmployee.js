@@ -14,6 +14,7 @@ const FormEmployee = ({submit, empToEdit}) => {
     const [name, setName] = useState('')
     const [photo, setPhoto] = useState('')
     const [position, setPosition] = useState('')
+    const [image, setImage] = useState('')
 
     //state de redux
     const errorValidate = useSelector( state => state.validate.error);
@@ -26,7 +27,8 @@ const FormEmployee = ({submit, empToEdit}) => {
     const validateError = () => dispatch(validationError())
 
     const previewFile = () => {
-        var file    = document.querySelector('input[type=file]').files[0];
+        var file = document.querySelector('input[type=file]').files[0]
+        setImage(file)
         console.log(file);
         var reader  = new FileReader();
         if (file) {
@@ -52,11 +54,11 @@ const FormEmployee = ({submit, empToEdit}) => {
         } else {
             //si todo sale bien
             validateSuccess();
-            
+
             let employee = {
                 identificacion_pais, 
                 name,
-                photo,
+                photo: image,
                 position,
             }
 

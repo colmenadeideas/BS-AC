@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost/BS-AC/backend/html/',
+    baseURL: 'http://lab.besign.com.ve/BS-AC/html',
     mode: 'no-cors',
     // headers` are custom headers to be sent
     // headers: {'X-Requested-With': 'XMLHttpRequest',

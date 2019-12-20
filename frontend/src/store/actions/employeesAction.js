@@ -63,7 +63,7 @@ export const getEmployeesError = () => ({
 export function addEmployeeAction(data) {
     return (dispatch) => {
         dispatch( addEmployeeRequest() );
-
+        console.log(data)
         // Peticion de insercion a la API
         axiosClient.post('api/employees/insert/employees', data)
             .then(response => {

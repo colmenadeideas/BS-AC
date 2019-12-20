@@ -60,6 +60,9 @@ h2 {
     padding: 5px 15px;
     margin-bottom: 20px;
 }
+.user__input:focus {
+    outline: unset;
+}
 
 /* css melanie para el form */
 .input-image {
