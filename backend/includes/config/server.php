@@ -21,10 +21,10 @@
 		
 		//Database Connection
 		define ( 'DB_TYPE', 'mysql');	
-		define ( 'DB_USER', 'db23550_besign');
-		define ( 'DB_PASSWORD', 'NetWT3.5oz');
-		define ( 'DB_PASS', 'NetWT3.5oz');
-		define ( 'DB_NAME', 'db23550_beeapps'); //
+		define ( 'DB_USER', 'db23550_mtrx');
+		define ( 'DB_PASSWORD', '70!nAQgk#g!');
+		define ( 'DB_PASS', '70!nAQgk#g!');
+		define ( 'DB_NAME', 'db23550_access_test'); //
 		define ( 'DB_PREFIX', '');
 		define ( 'URL_EMAIL', 'http://');
 ?>

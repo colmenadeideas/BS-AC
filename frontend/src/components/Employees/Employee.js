@@ -30,8 +30,6 @@ const Employee = (props, {history}) => {
     let res = -1
 
     const submitEmployee = (action, data, id) => {
-        console.log(data);
-
         if (action === 'add') {
             res = addEmp(data)
             console.log(res);
